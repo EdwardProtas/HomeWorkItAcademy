@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
                     break;
             }
         }
-        
     }
     @Override
     public void selectedContact(NewAdapter.Contact contact) {
