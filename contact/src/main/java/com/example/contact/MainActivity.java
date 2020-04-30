@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
             }
         }
     }
-
     @Override
     public void selectedContact(NewAdapter.Contact contact) {
         Intent intent = new Intent(MainActivity.this, RemoveActivity.class);
