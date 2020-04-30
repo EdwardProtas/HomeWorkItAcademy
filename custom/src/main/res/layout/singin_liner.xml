@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/marginTop"
+        android:text="@string/singin"
+        android:textColor="@color/black"
+        android:textSize="@dimen/SizeText" />
+
+
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/marginTop"
+        android:layout_marginEnd="@dimen/margin"
+        android:background="@drawable/edit_text_styles"
+        android:hint="@string/email"
+        android:padding="@dimen/margin"
+
+
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/marginTop"
+        android:layout_marginEnd="@dimen/margin"
+        android:background="@drawable/edit_text_styles"
+        android:hint="@string/password"
+        android:padding="@dimen/margin"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/marginTop"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimaryDark"
+            android:checked="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin"
+            android:text="@string/remember"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textRemember" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin"
+            android:gravity="end"
+            android:text="@string/forgotpassword"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textRemember" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/edit_text_styles"
+            android:backgroundTint="@color/black"
+            android:text="@string/singin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textRemember"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginBottom="@dimen/marginTopX"/>
+
+    </LinearLayout>
+</LinearLayout>

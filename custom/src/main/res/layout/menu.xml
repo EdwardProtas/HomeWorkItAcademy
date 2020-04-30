@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_attractions" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Attractions"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_dining" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Dining"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_education" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Education"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_family" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Family"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_health" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Health"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_office" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Office"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_promotions" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Promotions"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_radio" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Radio"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_recipes" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Recipes"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_sports" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/Sports"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/SizeText" />
+
+    </TableRow>
+
+
+</TableLayout>

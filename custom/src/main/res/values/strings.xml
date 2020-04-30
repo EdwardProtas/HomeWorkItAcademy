@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Custom</string>
+    <string name="Attractions">Attractions</string>
+    <string name="Dining">Dining</string>
+    <string name="Education">Education</string>
+    <string name="Family">Family</string>
+    <string name="Health">Health</string>
+    <string name="Office">Office</string>
+    <string name="Promotions">Promotions</string>
+    <string name="Radio">Radio</string>
+    <string name="Recipes">Recipes</string>
+    <string name="Sports">Sports</string>
+    <string name="title">Title</string>
+    <string name="price">Price</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="Inventory">Inventory</string>
+    <string name="weight">Weight</string>
+    <string name="singin">Sing in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember">Remember</string>
+    <string name="forgotpassword">Forgot password?</string>
+
+    <string name="android">Android</string>
+    <string name="number125">125</string>
+    <string name="post">Post</string>
+    <string name="number22k">22k</string>
+    <string name="followers">Followers</string>
+    <string name="number22">22</string>
+    <string name="following">Following</string>
+    <string name="username">Username</string>
+    <string name="address">Address</string>
+    <string name="descriptioN">DESCRIPTION</string>
+    <string name="call">CALL</string>
+    <string name="save">SAVE</string>
+    <string name="website">WEBSITE</string>
+    <string name="photo">PHOTO</string>
+    <string name="certificated">Certificated</string>
+    <string name="layouts">Layouts</string>
+    <string name="view">Views</string>
+</resources>
