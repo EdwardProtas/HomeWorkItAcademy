@@ -6,15 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
     private NewAdapter adapter;
     private static final int REQUEST_CODE_ADDCONTACT = 1;
     private static final int REQUEST_CODE_REMOVE = 2;
-    private static final String KEY_NUMBER = "number";
+    private static final String KEY = "savedInstanceState";
     private Boolean ff;
     private List<NewAdapter.Contact> newContactList = new ArrayList<>();
 
@@ -35,10 +31,8 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addButton = findViewById(R.id.addButton);
-
         recyclerview = findViewById(R.id.recyclerview);
-        recyclerview.setAdapter(new NewAdapter(newContactList, this));
-        recyclerview.setLayoutManager(new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +41,14 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
                 startActivityForResult(intent, REQUEST_CODE_ADDCONTACT);
             }
         });
+
+        if( savedInstanceState != null){
+            recyclerview.setAdapter((RecyclerView.Adapter) savedInstanceState.getParcelable(KEY));
+        }else {
+            recyclerview.setAdapter(new NewAdapter(newContactList, this));
+        }
+        recyclerview.setLayoutManager(new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
+        adapter = (NewAdapter) recyclerview.getAdapter();
     }
 
     @Override
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
                     String newName = data.getStringExtra("name");
                     String newNumberAndEmail = data.getStringExtra("number_email");
                     if (!newName.trim().isEmpty() && !newNumberAndEmail.trim().isEmpty() && recyclerview.getAdapter() != null) {
-                        adapter = (NewAdapter) recyclerview.getAdapter();
                         adapter.addItems(new NewAdapter.Contact(newName, newNumberAndEmail, ff));
                     }
                     break;
@@ -87,6 +88,13 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
             }
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(KEY , adapter);
+    }
+
     @Override
     public void selectedContact(NewAdapter.Contact contact) {
         Intent intent = new Intent(MainActivity.this, RemoveActivity.class);

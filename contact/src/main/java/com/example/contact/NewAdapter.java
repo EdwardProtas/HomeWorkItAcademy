@@ -1,21 +1,20 @@
 package com.example.contact;
-import android.content.Context;
-import android.content.Intent;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.widget.TextView;;
 import java.io.Serializable;
 import java.util.List;
-
 import androidx.annotation.NonNull;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> {
+public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> implements Parcelable, Serializable {
 
     private List<Contact> newContactList;
     private final int TYPE_ITEM1 = 0;
@@ -28,6 +27,22 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> 
         this.newContactList = newContactList;
         this.selectedContact = selectedContact;
     }
+
+    private NewAdapter ( Parcel s){
+        newContactList = (List<Contact>) s.readSerializable();
+    }
+
+    public static final Creator<NewAdapter> CREATOR = new Creator<NewAdapter>() {
+        @Override
+        public NewAdapter createFromParcel(Parcel in) {
+            return new NewAdapter(in);
+        }
+
+        @Override
+        public NewAdapter[] newArray(int size) {
+            return new NewAdapter[size];
+        }
+    };
 
     void addItems(Contact contact) {
         newContactList.add(contact);
@@ -74,9 +89,20 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> 
         return newContactList.size();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+       dest.writeSerializable((Serializable) newContactList);
+    }
+
     public interface SelectedContact {
         void selectedContact(Contact contact);
     }
+
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -85,14 +111,12 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> 
         private TextView text_name_contact;
         private TextView number;
 
-
         ItemViewHolder(View itemView) {
             super(itemView);
             phoneImage = itemView.findViewById(R.id.phoneImage);
             phoneImage2 = itemView.findViewById(R.id.phoneImage2);
             text_name_contact = itemView.findViewById(R.id.text_name_contact);
             number = itemView.findViewById(R.id.number);
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,14 +127,13 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> 
                 }
             });
         }
-
         void bind(Contact contact) {
             text_name_contact.setText(contact.nameText);
             number.setText(contact.numberText);
         }
     }
 
-    static class Contact {
+    static class Contact implements Serializable {
         private String nameText;
         private String numberText;
         private ImageView icon;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">taskKotlin</string>
+    <string name="app_name">Home3</string>
     <string name="searchContacts">Search contacts</string>
     <string name="addContact">Add contact</string>
     <string name="phoneNumber">Phone number</string>
