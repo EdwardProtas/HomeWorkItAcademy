@@ -1,3 +1,4 @@
 rootProject.name='HomeWorkItAcademy'
 include ':app'
 include ':flag'
+include ':custom'

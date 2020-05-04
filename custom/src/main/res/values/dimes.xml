@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="SizeText">40sp</dimen>
+    <dimen name="margin">15dp</dimen>
+    <dimen name="marginTop">20dp</dimen>
+    <dimen name="marginTopX">40dp</dimen>
+    <dimen name="textRemember">15dp</dimen>
+    <dimen name="task5">180dp</dimen>
+</resources>
