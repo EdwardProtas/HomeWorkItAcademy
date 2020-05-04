@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_ADDCONTACT:
-                    assert data != null;
+                 if (data != null){
                     boolean radioButtom_Phone = data.getBooleanExtra("radioButtom_Phone", false);
                     boolean radioButtom_Email = data.getBooleanExtra("radioButtom_Email", false);
                     if (radioButtom_Email) {
@@ -71,8 +70,10 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
                     if (!newName.trim().isEmpty() && !newNumberAndEmail.trim().isEmpty() && recyclerview.getAdapter() != null) {
                         adapter.addItems(new NewAdapter.Contact(newName, newNumberAndEmail, ff));
                     }
+                 }
                     break;
                 case REQUEST_CODE_REMOVE:
+                    if(data != null){
                     String nameRemove = data.getStringExtra("name_remove");
                     String NumberAndEmailREmove = data.getStringExtra("editText_phoneNumber");
                     Boolean flag = data.getBooleanExtra("flag" , false);
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
                     if (!nameRemove.trim().isEmpty() && !NumberAndEmailREmove.trim().isEmpty()) {
                         NewAdapter.Contact contact = new NewAdapter.Contact(nameRemove , NumberAndEmailREmove , flag);
                         adapter.upDate(contact);
+                    }
                     }
                 default:
                     break;
