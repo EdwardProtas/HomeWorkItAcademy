@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar_addContact"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimaryDark"
+       app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/keyboard"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_keyboard_backspace_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/toolBar_addContact"
+        app:layout_constraintTop_toTopOf="@id/toolBar_addContact"
+        app:layout_constraintLeft_toLeftOf="@id/toolBar_addContact"
+        android:layout_marginLeft="@dimen/padding"
+        />
+
+    <TextView
+        android:id="@+id/addContact"
+        android:layout_marginLeft="@dimen/heightLinear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addContact"
+        android:textColor="@android:color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/toolBar_addContact"
+        app:layout_constraintTop_toTopOf="@id/toolBar_addContact"
+        app:layout_constraintLeft_toRightOf="@id/keyboard"
+
+        />
+
+    <ImageView
+        android:id="@+id/add"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_done_black_24dp"
+        android:layout_marginRight="@dimen/padding"
+        app:layout_constraintBottom_toBottomOf="@id/toolBar_addContact"
+        app:layout_constraintTop_toTopOf="@id/toolBar_addContact"
+        app:layout_constraintRight_toRightOf="@id/toolBar_addContact"
+        />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/toolBar_addContact"
+    app:layout_constraintLeft_toLeftOf="parent">
+
+    <RadioButton
+        android:id="@+id/radioButtom_Phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/buttonPadding"
+        app:layout_constraintTop_toBottomOf="@id/toolBar_addContact"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <RadioButton
+        android:id="@+id/radioButtom_Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/buttonPadding"
+        app:layout_constraintTop_toBottomOf="@id/radioButtom_Phone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+</RadioGroup>
+
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phoneNumber"
+        android:textSize="@dimen/buttonPadding"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginTop="@dimen/buttonPadding"
+        app:layout_constraintTop_toBottomOf="@id/toolBar_addContact"
+        app:layout_constraintLeft_toRightOf="@id/radioGroup"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textSize="@dimen/buttonPadding"
+        android:layout_marginTop="@dimen/buttonPadding"
+        android:layout_marginLeft="@dimen/padding"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumber"
+        app:layout_constraintLeft_toRightOf="@id/radioGroup"
+        app:layout_constraintBottom_toBottomOf="@id/radioGroup"/>
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        android:layout_margin="@dimen/buttonPadding"
+        android:hint="@string/name"/>
+
+    <EditText
+        android:id="@+id/editText_phoneNumber_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/buttonPadding"
+        android:hint="@string/phoneNumber_email"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
