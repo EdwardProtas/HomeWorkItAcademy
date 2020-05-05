@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/contactkotlin" />
             <option value="$PROJECT_DIR$/custom" />
             <option value="$PROJECT_DIR$/flag" />
+            <option value="$PROJECT_DIR$/mp3player" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
