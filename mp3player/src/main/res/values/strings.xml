@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MP3Player</string>
+    <string name="app_name">MediaPlayer</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="stop">Stop</string>
+    <string name="play">Play</string>
 </resources>
