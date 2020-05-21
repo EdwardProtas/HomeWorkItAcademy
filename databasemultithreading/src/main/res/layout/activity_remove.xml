@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar_remove"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+
+    <ImageView
+        android:id="@+id/keyboard2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_keyboard_backspace_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/toolBar_remove"
+        app:layout_constraintTop_toTopOf="@id/toolBar_remove"
+        app:layout_constraintLeft_toLeftOf="@id/toolBar_remove"
+        android:layout_marginLeft="@dimen/padding"
+        />
+
+    <TextView
+        android:id="@+id/addContact2"
+        android:layout_marginLeft="@dimen/heightLinear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editContact"
+        android:textColor="@android:color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/toolBar_remove"
+        app:layout_constraintTop_toTopOf="@id/toolBar_remove"
+        app:layout_constraintLeft_toRightOf="@id/keyboard2"
+        />
+
+    <EditText
+        android:id="@+id/name_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolBar_remove"
+        android:layout_margin="@dimen/buttonPadding"
+        android:hint="@string/name"/>
+
+    <EditText
+        android:id="@+id/editText_phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/buttonPadding"
+        android:hint="@string/phoneNumber_email"
+        app:layout_constraintTop_toBottomOf="@id/name_remove"
+        />
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:textColor="@android:color/white"
+        android:inputType="number"
+        android:textSize="@dimen/buttonPadding"
+        android:layout_marginBottom="@dimen/buttonPadding"
+        android:layout_marginRight="@dimen/buttonPadding"
+        android:layout_marginLeft="@dimen/buttonPadding"
+        android:background="@drawable/button_remove"
+        app:layout_constraintBottom_toTopOf="@id/remove_button"/>
+
+    <Button
+        android:id="@+id/remove_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/remove"
+        android:textColor="@android:color/white"
+        android:inputType="number"
+        android:textSize="@dimen/buttonPadding"
+        android:layout_marginBottom="@dimen/heightToolBar"
+        android:layout_marginRight="@dimen/buttonPadding"
+        android:layout_marginLeft="@dimen/buttonPadding"
+        android:background="@drawable/button_remove"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

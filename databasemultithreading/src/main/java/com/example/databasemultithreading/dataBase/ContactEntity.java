@@ -1,11 +1,6 @@
-package com.example.database.dataBase;
+package com.example.databasemultithreading.dataBase;
 
-import android.app.AlertDialog;
-import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -55,5 +50,7 @@ public class ContactEntity {
     public void setNumber_email(String number_email) {
         this.number_email = number_email;
     }
+
+
 
 }
