@@ -13,6 +13,7 @@ import com.facebook.stetho.Stetho;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         addButton = findViewById(R.id.addButton);
         recyclerview = findViewById(R.id.recyclerview);
         Stetho.initializeWithDefaults(this);
-        addDataBase();
+        mDataBase = DataBase.getInstance(MainActivity.this);
         getContacts();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +60,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         adapter = (NewAdapter) recyclerview.getAdapter();
     }
 
-    public void addDataBase() {
-        mDataBase = Room.databaseBuilder(this, DataBase.class, "db_contact")
-                .allowMainThreadQueries()
-                .build();
-    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -132,10 +129,15 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         startActivityForResult(intent, REQUEST_CODE_REMOVE);
     }
 
-    public void addContact(NewAdapter.Contact contact) {
-        ContactEntity contactEntity = new ContactEntity(contact.getNameText(), contact.getNumberText(), contact.getType());
-        mDataBase.getContactDao().insert(contactEntity);
-        contact.setId(contactEntity.getId());
+    public void addContact(final NewAdapter.Contact contact) {
+        mDataBase.getDataBaseExecutorService().execute(new Runnable() {
+            @Override
+            public void run() {
+                ContactEntity contactEntity = new ContactEntity(contact.getNameText(), contact.getNumberText(), contact.getType());
+                mDataBase.getContactDao().insert(contactEntity);
+                contact.setId(contactEntity.getId());
+            }
+        });
     }
 
     public void getContacts() {
@@ -154,16 +156,27 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         }
     }
 
-    public void deleteContact(NewAdapter.Contact contact){
-        ContactEntity contactEntity = new ContactEntity(contact.getNameText() , contact.getNumberText(),contact.getType());
-        contactEntity.setId(contact.getId());
-        mDataBase.getContactDao().delete(contactEntity);
+    public void deleteContact(final NewAdapter.Contact contact){
+        mDataBase.getDataBaseExecutorService().execute(new Runnable() {
+            @Override
+            public void run() {
+                ContactEntity contactEntity = new ContactEntity(contact.getNameText() , contact.getNumberText(),contact.getType());
+                contactEntity.setId(contact.getId());
+                mDataBase.getContactDao().delete(contactEntity);
+            }
+        });
+
     }
 
-    public void updateContact(NewAdapter.Contact contact){
-        ContactEntity contactEntity = new ContactEntity(contact.getNameText() , contact.getNumberText(),contact.getType());
-        contactEntity.setId(contact.getId());
-            mDataBase.getContactDao().upData(contactEntity);
+    public void updateContact(final NewAdapter.Contact contact){
+        mDataBase.getDataBaseExecutorService().execute(new Runnable() {
+            @Override
+            public void run() {
+                ContactEntity contactEntity = new ContactEntity(contact.getNameText() , contact.getNumberText(),contact.getType());
+                contactEntity.setId(contact.getId());
+                mDataBase.getContactDao().upData(contactEntity);
+            }
+        });
     }
 
     @Override
