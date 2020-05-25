@@ -26,6 +26,11 @@ public class NewAdapter extends RecyclerView.Adapter<NewAdapter.ItemViewHolder> 
     private Contact contact;
     private int getPosition ;
 
+
+    public void setNewContactList(List<Contact> newContactList) {
+        this.newContactList = newContactList;
+    }
+
     public NewAdapter(List<Contact> newContactList, SelectedContact selectedContact) {
         this.newContactList = newContactList;
         this.selectedContact = selectedContact;

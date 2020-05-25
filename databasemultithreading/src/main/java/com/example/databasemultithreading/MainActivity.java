@@ -14,13 +14,14 @@ import com.facebook.stetho.Stetho;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 public class MainActivity extends AppCompatActivity implements NewAdapter.SelectedContact {
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         recyclerview = findViewById(R.id.recyclerview);
         Stetho.initializeWithDefaults(this);
         mDataBase = DataBase.getInstance(MainActivity.this);
+        Stetho.initializeWithDefaults(this);
         getContacts();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,20 +143,27 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
     }
 
     public void getContacts() {
-        List<ContactEntity> contactEntities = mDataBase.getContactDao().getAllContacts();
-        NewAdapter.Contact contact;
-        for (ContactEntity contactEntity: contactEntities) {
-
-            if(contactEntity.getType().equals(true)){
-                contact = new NewAdapter.Contact(contactEntity.getName() , contactEntity.getNumber_email() , contactEntity.getType());
-                contact.setId(contactEntity.getId());
-            } else {
-                contact = new NewAdapter.Contact(contactEntity.getName() ,contactEntity.getNumber_email() , contactEntity.getType());
-                contact.setId(contactEntity.getId());
+        CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(new Supplier<Void>() {
+            @Override
+            public Void get() {
+                List<ContactEntity> contactEntities = mDataBase.getContactDao().getAllContacts();
+                NewAdapter.Contact contact;
+                for (ContactEntity contactEntity : contactEntities) {
+                    if (contactEntity.getType().equals(true)) {
+                        contact = new NewAdapter.Contact(contactEntity.getName(), contactEntity.getNumber_email(), contactEntity.getType());
+                        contact.setId(contactEntity.getId());
+                    } else {
+                        contact = new NewAdapter.Contact(contactEntity.getName(), contactEntity.getNumber_email(), contactEntity.getType());
+                        contact.setId(contactEntity.getId());
+                    }
+                    newContactList.add(contact);
+                }
+                return null;
             }
-            newContactList.add(contact);
-        }
+        }, mDataBase.getDataBaseExecutorService());
     }
+
+
 
     public void deleteContact(final NewAdapter.Contact contact){
         mDataBase.getDataBaseExecutorService().execute(new Runnable() {
@@ -184,4 +193,5 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         super.onDestroy();
         mDataBase.close();
     }
+
 }

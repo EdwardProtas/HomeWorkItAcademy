@@ -87,8 +87,8 @@ public class RemoveActivity extends AppCompatActivity {
 
     private void dialog() {
         mDialog = new AlertDialog.Builder(this)
-                .setMessage("Действительно удалить контакт?")
-                .setPositiveButton("Удалить", new DialogInterface.OnClickListener() {
+                .setMessage(R.string.remove_contact)
+                .setPositiveButton(R.string.remove_с, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String name_user = name_remove.getText().toString();
@@ -102,11 +102,11 @@ public class RemoveActivity extends AppCompatActivity {
                             setResult(RESULT_OK, intent);
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Обнулите значения", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.error_remove_contact, Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
-                .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancellation, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mDialog.cancel();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Home6</string>
+    <string name="app_name">Home7</string>
     <string name="searchContacts">Search contacts</string>
     <string name="addContact">Add contact</string>
     <string name="phoneNumber">Phone number</string>
@@ -8,5 +8,10 @@
     <string name="name">Name</string>
     <string name="editContact">Edit contact</string>
     <string name="remove">Remove</string>
+    <string name="remove_с">Удалить</string>
     <string name="edit">Edit</string>
+    <string name="remove_contact">Действительно удалить контакт?</string>
+    <string name="error_remove_contact">Обнулите значения</string>
+    <string name="cancellation">отмена</string>
+
 </resources>
