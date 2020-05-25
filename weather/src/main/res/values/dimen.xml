@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<dimen name="settings_toolBar">24sp</dimen>
+<dimen name="margin_left">18dp</dimen>
+<dimen name="switch_celsius">28sp</dimen>
+</resources>
