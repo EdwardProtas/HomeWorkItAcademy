@@ -41,7 +41,7 @@
             android:text="@string/cesius"
             android:textSize="@dimen/switch_celsius"
             android:layout_margin="@dimen/margin_left"
-            android:checked="true"
+            android:checked="false"
             />
 
     </LinearLayout>

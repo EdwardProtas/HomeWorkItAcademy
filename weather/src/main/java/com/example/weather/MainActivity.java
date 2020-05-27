@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 import com.example.weather.fragmentCityList.CityFragment;
+import com.example.weather.fragmentSetting.SettingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
 
-        fragmentManager.beginTransaction().add(R.id.fragmentContainer , new CityFragment() , "Tag").commit();
+      fragmentManager.beginTransaction().add(R.id.fragmentContainer , new CityFragment() , "Tag").commit();
+//        fragmentManager.beginTransaction().add(R.id.fragmentContainer , new SettingFragment() , "Tag").commit();
 
 
     }

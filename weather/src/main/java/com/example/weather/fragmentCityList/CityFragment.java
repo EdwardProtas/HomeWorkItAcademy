@@ -52,26 +52,31 @@ public class CityFragment extends Fragment {
         if (activity != null) {
             recyclerView = view.findViewById(R.id.recyclerview_city);
             buttonAddCity = view.findViewById(R.id.buttonAddCity);
+            sharedPreferences = activity.getSharedPreferences(MainActivity.MAINACTINITY,Context.MODE_PRIVATE);
             Stetho.initializeWithDefaults(activity);
             dataBase = DataBase.getInstance(activity);
             initializationRecyclerView();
             conclusionCityFromDatabase();
+            touchNameCity();
             buttonAddCity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     initializationDialog();
                 }
             });
-            touchNameCity();
         }
     }
+
+
 
     private void touchNameCity() {
         listCityAdapter.setCityListener(new ListCityAdapter.CityListener() {
             @Override
             public void onClickCityListener(String nameCity) {
                 listCityAdapter.setNowNameCity(nameCity);
-
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("NAMECITY" , nameCity);
+                editor.apply();
             }
         });
     }
@@ -106,7 +111,7 @@ public class CityFragment extends Fragment {
     }
 
     private void initializationRecyclerView() {
-         recyclerView.setAdapter(new ListCityAdapter());
+        recyclerView.setAdapter(new ListCityAdapter());
             recyclerView.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
             listCityAdapter = (ListCityAdapter) recyclerView.getAdapter();
 
@@ -126,4 +131,9 @@ public class CityFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dataBase.close();
+    }
 }
