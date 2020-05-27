@@ -9,15 +9,17 @@ import com.example.weather.fragmentCityList.CityFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MAINACTINITY = "MAINACTINITY";
+
     private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragmentManager =getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
-        fragmentManager.beginTransaction().add(R.id.fragmentContainer , new CityFragment() , "tag").commit();
+        fragmentManager.beginTransaction().add(R.id.fragmentContainer , new CityFragment() , "Tag").commit();
 
 
     }

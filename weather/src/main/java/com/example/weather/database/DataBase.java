@@ -14,6 +14,8 @@ import androidx.room.RoomDatabase;
 @Database(entities = {CityEntity.class}, version = 1)
 public abstract class DataBase extends RoomDatabase {
 
+    public abstract CityDao getCity();
+
     private static final int CORE_NUMBER = Runtime.getRuntime().availableProcessors();
     private static volatile  DataBase INSTANCE;
 

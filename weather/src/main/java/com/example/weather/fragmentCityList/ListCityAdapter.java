@@ -1,6 +1,7 @@
 package com.example.weather.fragmentCityList;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,13 +18,33 @@ public class ListCityAdapter extends RecyclerView.Adapter<ListCityAdapter.CityLi
 
     private ArrayList<String> arrayNameCitys = new ArrayList<>();
     private String nowNameCity;
+    private CityListener CityListener;
 
-    void addCity(String city){
-        arrayNameCitys.add(city);
+    public void addCity(String city) {
+        this.arrayNameCitys.add(city);
         notifyDataSetChanged();
     }
+    public ListCityAdapter(){}
 
+    public ListCityAdapter(String nowNameCity) {
+        this.nowNameCity = nowNameCity;
+    }
 
+    public void setNowNameCity(String nowNameCity) {
+        this.nowNameCity = nowNameCity;
+    }
+
+    public void setArrayNameCitys(ArrayList<String> arrayNameCitys) {
+        this.arrayNameCitys = arrayNameCitys;
+    }
+
+    public void setCityListener(ListCityAdapter.CityListener cityListener) {
+        CityListener = cityListener;
+    }
+
+    interface CityListener {
+        void onClickCityListener(String nameCity);
+    }
 
 
     @NonNull
@@ -57,8 +78,22 @@ public class ListCityAdapter extends RecyclerView.Adapter<ListCityAdapter.CityLi
             done_fragmentCity = itemView.findViewById(R.id.done_fragmentCity);
         }
 
-        private void bind(String nameCity) {
+        private void bind(final String nameCity) {
             text_city_fragmentCity.setText(nameCity);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CityListener.onClickCityListener(text_city_fragmentCity.getText().toString());
+                    if (nameCity.equals(nowNameCity)) {
+                        if (done_fragmentCity.getVisibility() == View.VISIBLE) {
+                            done_fragmentCity.setVisibility(View.INVISIBLE);
+                        } else {
+                            done_fragmentCity.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            });
         }
     }
 }
