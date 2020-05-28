@@ -38,6 +38,7 @@ public class CityFragment extends Fragment {
     private FloatingActionButton buttonAddCity;
     private DataBase dataBase;
     private SharedPreferences sharedPreferences;
+    private String cityCity;
 
     @Nullable
     @Override
@@ -67,16 +68,11 @@ public class CityFragment extends Fragment {
         }
     }
 
-
-
     private void touchNameCity() {
         listCityAdapter.setCityListener(new ListCityAdapter.CityListener() {
             @Override
             public void onClickCityListener(String nameCity) {
                 listCityAdapter.setNowNameCity(nameCity);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("NAMECITY" , nameCity);
-                editor.apply();
             }
         });
     }
@@ -114,7 +110,6 @@ public class CityFragment extends Fragment {
         recyclerView.setAdapter(new ListCityAdapter());
             recyclerView.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
             listCityAdapter = (ListCityAdapter) recyclerView.getAdapter();
-
     }
 
     private void conclusionCityFromDatabase() {

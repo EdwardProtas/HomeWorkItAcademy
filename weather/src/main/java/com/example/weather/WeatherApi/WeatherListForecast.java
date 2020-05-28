@@ -13,8 +13,4 @@ public class WeatherListForecast {
     public List<WeatherListForecastMainIconTemp> getWeatherListForecastMainIconTemps() {
         return WeatherListForecastMainIconTemps;
     }
-
-    public void setWeatherListForecastMainIconTemps(List<WeatherListForecastMainIconTemp> weatherListForecastMainIconTemps) {
-        WeatherListForecastMainIconTemps = weatherListForecastMainIconTemps;
-    }
 }

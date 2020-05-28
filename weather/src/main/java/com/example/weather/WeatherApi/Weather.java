@@ -15,15 +15,8 @@ public class Weather {
         return weatherTempMain;
     }
 
-    public void setWeatherTempMain(WeatherTempMain weatherTempMain) {
-        this.weatherTempMain = weatherTempMain;
-    }
-
     public List<WeatherMainIconWeather> getWeatherMainIconWeathers() {
         return weatherMainIconWeathers;
     }
 
-    public void setWeatherMainIconWeathers(List<WeatherMainIconWeather> weatherMainIconWeathers) {
-        this.weatherMainIconWeathers = weatherMainIconWeathers;
-    }
 }

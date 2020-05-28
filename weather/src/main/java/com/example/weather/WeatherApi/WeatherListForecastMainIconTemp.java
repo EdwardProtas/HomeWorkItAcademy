@@ -2,7 +2,10 @@ package com.example.weather.WeatherApi;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class WeatherListForecastMainIconTemp {
     @SerializedName("dt")
@@ -24,15 +27,13 @@ public class WeatherListForecastMainIconTemp {
         return weatherMainIconWeathers;
     }
 
-    public void setWeatherMainIconWeathers(List<WeatherMainIconWeather> weatherMainIconWeathers) {
-        this.weatherMainIconWeathers = weatherMainIconWeathers;
-    }
-
     public com.example.weather.WeatherApi.WeatherTempMain getWeatherTempMain() {
         return WeatherTempMain;
     }
 
-    public void setWeatherTempMain(com.example.weather.WeatherApi.WeatherTempMain weatherTempMain) {
-        WeatherTempMain = weatherTempMain;
+
+    public String ConvertorTime(long time){
+        String dataFormate = new SimpleDateFormat("EEE HH:mm" , Locale.getDefault()).format(new Date(time));
+        return dataFormate;
     }
 }

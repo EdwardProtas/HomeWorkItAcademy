@@ -13,15 +13,7 @@ public class WeatherMainIconWeather {
         return mainWeather;
     }
 
-    public void setMainWeather(String mainWeather) {
-        this.mainWeather = mainWeather;
-    }
-
     public String getIconId() {
         return iconId;
-    }
-
-    public void setIconId(String iconId) {
-        this.iconId = iconId;
     }
 }
