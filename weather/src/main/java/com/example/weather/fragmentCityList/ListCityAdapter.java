@@ -1,7 +1,6 @@
 package com.example.weather.fragmentCityList;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,7 +34,8 @@ public class ListCityAdapter extends RecyclerView.Adapter<ListCityAdapter.CityLi
     }
 
     public void setArrayNameCitys(ArrayList<String> arrayNameCitys) {
-        this.arrayNameCitys = arrayNameCitys;
+        this.arrayNameCitys = new ArrayList<>(arrayNameCitys);
+        notifyDataSetChanged();
     }
 
     public void setCityListener(ListCityAdapter.CityListener cityListener) {
@@ -80,7 +80,6 @@ public class ListCityAdapter extends RecyclerView.Adapter<ListCityAdapter.CityLi
 
         private void bind(final String nameCity) {
             text_city_fragmentCity.setText(nameCity);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -6,25 +6,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.weather.R;
 import com.example.weather.WeatherApi.WeatherListForecastMainIconTemp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class FragmentMainAdapter extends RecyclerView.Adapter<FragmentMainAdapter.FroastViewHolder> {
 
-    private ArrayList<WeatherListForecastMainIconTemp> weatherListForecastMainIconTempe;
+    private List<WeatherListForecastMainIconTemp> weatherListForecastMainIconTempe;
+    private String celsuia;
 
+    public void setCelsuia(String celsuia) {
+        this.celsuia = celsuia;
+    }
 
-
+    public void setWeatherListForecastMainIconTempe(List<WeatherListForecastMainIconTemp> weatherListForecastMainIconTempe) {
+        this.weatherListForecastMainIconTempe = new ArrayList<>(weatherListForecastMainIconTempe);
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
     public FroastViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_main , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_weather_city, parent, false);
         return new FroastViewHolder(view);
     }
 
@@ -54,10 +63,15 @@ public class FragmentMainAdapter extends RecyclerView.Adapter<FragmentMainAdapte
         }
 
         void bind(WeatherListForecastMainIconTemp weatherListForecastMainIconTemp) {
-            weather_icon.setImageResource(Integer.parseInt(weatherListForecastMainIconTemp.getWeatherMainIconWeathers().get(0).getIconId()));
+            Glide.with(itemView.getContext())
+                    .load(weatherListForecastMainIconTemp.getWeatherMainIconWeathers().get(0).getIconId())
+                    .into(weather_icon);
             oclock.setText(weatherListForecastMainIconTemp.ConvertorTime(weatherListForecastMainIconTemp.getDt() * 1000L));
             text_city_fragmentWeatherCity.setText(weatherListForecastMainIconTemp.getWeatherMainIconWeathers().get(0).getMainWeather());
-            celsius.setText(weatherListForecastMainIconTemp.getWeatherTempMain().getTemperature());
+            int celsuiaMain = (int) (Double.parseDouble(weatherListForecastMainIconTemp.getWeatherTempMain().getTemperature()) - 273);
+            if (celsuia.equals(" °F")) {
+                celsius.setText(((celsuiaMain + 32) + celsuia));
+            } else celsius.setText(celsuiaMain + celsuia);
         }
     }
 }

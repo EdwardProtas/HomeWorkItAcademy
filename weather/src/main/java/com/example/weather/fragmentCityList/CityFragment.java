@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +18,18 @@ import com.example.weather.database.DataBase;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 public class CityFragment extends Fragment {
 
@@ -53,12 +54,18 @@ public class CityFragment extends Fragment {
         if (activity != null) {
             recyclerView = view.findViewById(R.id.recyclerview_city);
             buttonAddCity = view.findViewById(R.id.buttonAddCity);
-            sharedPreferences = activity.getSharedPreferences(MainActivity.MAINACTINITY,Context.MODE_PRIVATE);
             Stetho.initializeWithDefaults(activity);
             dataBase = DataBase.getInstance(activity);
             initializationRecyclerView();
             conclusionCityFromDatabase();
             touchNameCity();
+            sharedPreferences = activity.getSharedPreferences(MainActivity.MAINACTINITY, Context.MODE_PRIVATE);
+            if (sharedPreferences != null) {
+                String city = sharedPreferences.getString("CITY", "");
+                if (!city.equals("")) {
+                    listCityAdapter.setNowNameCity(city);
+                }
+            }
             buttonAddCity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -68,11 +75,20 @@ public class CityFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("CITY", cityCity);
+        editor.apply();
+    }
+
     private void touchNameCity() {
         listCityAdapter.setCityListener(new ListCityAdapter.CityListener() {
             @Override
             public void onClickCityListener(String nameCity) {
                 listCityAdapter.setNowNameCity(nameCity);
+               cityCity = nameCity;
             }
         });
     }
@@ -108,22 +124,28 @@ public class CityFragment extends Fragment {
 
     private void initializationRecyclerView() {
         recyclerView.setAdapter(new ListCityAdapter());
-            recyclerView.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
-            listCityAdapter = (ListCityAdapter) recyclerView.getAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
+        listCityAdapter = (ListCityAdapter) recyclerView.getAdapter();
     }
 
     private void conclusionCityFromDatabase() {
-        CompletableFuture.supplyAsync(new Supplier() {
+        CompletableFuture.supplyAsync(new Supplier<ArrayList<String>>() {
             @Override
-            public Object get() {
+            public ArrayList<String> get() {
                 List<CityEntity> cityEntities = dataBase.getCity().getAllCity();
+                ArrayList<String> citys = new ArrayList<>();
                 for (CityEntity citiEntity : cityEntities) {
-                    listCityAdapter.addCity(citiEntity.getNameCity());
+                    citys.add(citiEntity.getNameCity());
                 }
-                return null;
+                return citys;
             }
-        }, dataBase.getDataBaseCityExecutorService());
-
+        }, dataBase.getDataBaseCityExecutorService())
+                .thenAcceptAsync(new Consumer<ArrayList<String>>() {
+                    @Override
+                    public void accept(ArrayList<String> strings) {
+                        listCityAdapter.setArrayNameCitys(strings);
+                    }
+                }, ContextCompat.getMainExecutor(activity));
     }
 
     @Override

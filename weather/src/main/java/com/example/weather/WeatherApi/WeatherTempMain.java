@@ -11,7 +11,4 @@ public class WeatherTempMain {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
-    }
 }

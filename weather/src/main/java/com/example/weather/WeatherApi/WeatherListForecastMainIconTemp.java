@@ -33,7 +33,7 @@ public class WeatherListForecastMainIconTemp {
 
 
     public String ConvertorTime(long time){
-        String dataFormate = new SimpleDateFormat("EEE HH:mm" , Locale.getDefault()).format(new Date(time));
+        String dataFormate = new SimpleDateFormat("HH:mm" , Locale.getDefault()).format(new Date(time));
         return dataFormate;
     }
 }

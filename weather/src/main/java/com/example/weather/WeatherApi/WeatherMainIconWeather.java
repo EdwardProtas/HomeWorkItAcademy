@@ -16,4 +16,8 @@ public class WeatherMainIconWeather {
     public String getIconId() {
         return iconId;
     }
+
+    public void setIconId(String iconId) {
+        this.iconId = iconId;
+    }
 }

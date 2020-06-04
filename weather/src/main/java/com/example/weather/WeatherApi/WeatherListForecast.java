@@ -13,4 +13,5 @@ public class WeatherListForecast {
     public List<WeatherListForecastMainIconTemp> getWeatherListForecastMainIconTemps() {
         return WeatherListForecastMainIconTemps;
     }
+
 }

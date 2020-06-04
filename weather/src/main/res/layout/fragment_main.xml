@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -42,6 +43,8 @@
         android:layout_marginTop="@dimen/margint_top_fragment_main"
         android:textSize="@dimen/name_city_fragment_main"
         android:hint="@string/city"
+        android:gravity="center"
+        android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolBar"
@@ -49,9 +52,10 @@
 
     <ImageView
         android:id="@+id/snowFragmentMain"
-        android:layout_width="wrap_content"
+        android:layout_width="58dp"
         android:layout_height="wrap_content"
-        tools:src ="@drawable/ic_ac_unit_black_24dp"
+        android:maxHeight="52dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@id/nameCityFragmentMain"
         app:layout_constraintLeft_toRightOf="@id/nameCityFragmentMain"
         app:layout_constraintTop_toBottomOf="@id/toolBar"
@@ -63,6 +67,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="@dimen/name_city_fragment_main"
+        android:gravity="center"
         android:hint="-29 C"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -74,7 +79,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/settings_toolBar"
+        android:textColor="@android:color/black"
         android:hint="now snowing"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textTempFragmentMain" />
@@ -84,7 +91,7 @@
         android:id="@+id/recyclerviewFragmentMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/switch_celsius"
+        android:layout_margin="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textWeatherfragmentMain"
