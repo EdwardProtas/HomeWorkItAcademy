@@ -14,6 +14,7 @@ import com.facebook.stetho.Stetho;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import androidx.annotation.NonNull;
@@ -143,24 +144,31 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
     }
 
     public void getContacts() {
-        CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(new Supplier<Void>() {
+        CompletableFuture.supplyAsync(new Supplier<ArrayList<NewAdapter.Contact>>() {
             @Override
-            public Void get() {
+            public ArrayList<NewAdapter.Contact> get() {
                 List<ContactEntity> contactEntities = mDataBase.getContactDao().getAllContacts();
-                NewAdapter.Contact contact;
+                ArrayList<NewAdapter.Contact> contact = new ArrayList<>();
                 for (ContactEntity contactEntity : contactEntities) {
+                    NewAdapter.Contact contact1;
                     if (contactEntity.getType().equals(true)) {
-                        contact = new NewAdapter.Contact(contactEntity.getName(), contactEntity.getNumber_email(), contactEntity.getType());
-                        contact.setId(contactEntity.getId());
+                         contact1 = new NewAdapter.Contact(contactEntity.getName(), contactEntity.getNumber_email(), contactEntity.getType());
+                        contact1.setId(contactEntity.getId());
                     } else {
-                        contact = new NewAdapter.Contact(contactEntity.getName(), contactEntity.getNumber_email(), contactEntity.getType());
-                        contact.setId(contactEntity.getId());
+                         contact1 = new NewAdapter.Contact(contactEntity.getName(), contactEntity.getNumber_email(), contactEntity.getType());
+                        contact1.setId(contactEntity.getId());
                     }
-                    newContactList.add(contact);
+                    contact.add(contact1);
                 }
-                return null;
+                return contact;
             }
-        }, mDataBase.getDataBaseExecutorService());
+        }, mDataBase.getDataBaseExecutorService())
+                .thenAcceptAsync(new Consumer<ArrayList<NewAdapter.Contact>>() {
+            @Override
+            public void accept(ArrayList<NewAdapter.Contact> contacts) {
+                adapter.setNewContactList(contacts);
+            }
+        },ContextCompat.getMainExecutor(this));
     }
 
 
