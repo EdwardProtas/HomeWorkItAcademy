@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/date_holder"
+        android:layout_width="0dp"
+        android:layout_weight="0.6"
+        android:layout_height="wrap_content"
+        android:hint="09.06.20"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="@dimen/def_magrin_main_fragment"
+        android:layout_marginLeft="@dimen/def_magrin_main_fragment"/>
+
+    <TextView
+        android:id="@+id/coment_holder"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:hint="Работа"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/def_magrin_text"
+        android:layout_marginLeft="@dimen/magr10dp"
+        android:layout_marginTop="@dimen/def_magrin_main_fragment"/>
+
+    <TextView
+        android:id="@+id/cym_holder"
+        android:layout_width="0dp"
+        android:layout_weight="0.8"
+        android:layout_height="wrap_content"
+        android:hint="3400"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:gravity="right"
+        android:layout_marginTop="@dimen/def_magrin_main_fragment" />
+
+    <TextView
+        android:id="@+id/currency_holder"
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:layout_height="wrap_content"
+        android:hint="BY"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:gravity="right"
+        android:layout_marginTop="@dimen/def_magrin_main_fragment"
+        android:layout_marginRight="@dimen/def_magrin_main_fragment"/>
+
+</LinearLayout>

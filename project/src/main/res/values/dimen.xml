@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_screen_dimen">40dp</dimen>
+    <dimen name="splash_screen_text_size">24dp</dimen>
+    <dimen name="def_magrin_main_fragment">18dp</dimen>
+    <dimen name="def_magrin_text">24dp</dimen>
+    <dimen name="magr10dp">10dp</dimen>
+</resources>

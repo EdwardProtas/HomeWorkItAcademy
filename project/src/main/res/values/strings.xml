@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Project</string>
+    <string name="app_name">Главная</string>
+    <string name="splash_screen_text">From Eduard Protas</string>
+    <string name="income">Доходы</string>
+    <string name="main">Главная</string>
+    <string name="expenses">Расходы</string>
+    <string name="сurrencies">Валюты</string>
+    <string name="allIncome">Сумма</string>
+    <string name="category">Категория</string>
+    <string name="bill">Счет</string>
+    <string name="date">Дата</string>
+    <string name="intfo">Итого</string>
+    <string name="cash">Наличные</string>
+    <string name="karta">Карта</string>
+    <string name="job">Работа</string>
+    <string name="present">Подарки</string>
 </resources>

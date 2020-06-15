@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="@string/main"
+        android:id="@+id/main"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="never"/>
+
+    <item android:title="@string/income"
+        android:id="@+id/income"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:title="@string/expenses"
+        android:id="@+id/expenses"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:title="@string/сurrencies"
+        android:id="@+id/сurrencies"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+</menu>
