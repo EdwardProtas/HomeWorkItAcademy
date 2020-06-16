@@ -23,24 +23,27 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeHold
     private List<Income> incomeList = new ArrayList<>();
     private ListenerIncome listenerIncome;
 
-    public void addIncome (Income income){
-        incomeList.add(income);
-        notifyDataSetChanged();
+    public List<Income> getIncomeList() {
+        return incomeList;
     }
 
     public void setIncomeList(List<Income> incomeList) {
-        this.incomeList = new ArrayList<>(incomeList) ;
+        this.incomeList = new ArrayList<>(incomeList);
         notifyDataSetChanged();
     }
 
-    interface ListenerIncome{
+    public Income getIncomeAt(int position){
+        return incomeList.get(position);
+    }
+
+    interface ListenerIncome {
         void onClickLisneterIncome(Income income);
     }
 
     @NonNull
     @Override
     public IncomeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_holder ,parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_holder, parent, false);
         return new IncomeHolder(view);
     }
 
@@ -67,23 +70,19 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeHold
             coment_holder = itemView.findViewById(R.id.coment_holder);
             cym_holder = itemView.findViewById(R.id.cym_holder);
             currency_holder = itemView.findViewById(R.id.currency_holder);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listenerIncome.onClickLisneterIncome(incomeList.get(getAdapterPosition()));
-                }
-            });
+
         }
 
         void bind(Income income) {
             date_holder.setText(convertorTime(income));
-            coment_holder.setText(income.getBill());
-            cym_holder.setText((int) income.getIncome());
-            currency_holder.setText(income.getBill());
+            coment_holder.setText(income.getCategory());
+            cym_holder.setText(income.getIncome());
+            currency_holder.setText(income.getCurrencyIncome());
         }
 
         public String convertorTime(Income income) {
-            return new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(income.getData());
+            return new SimpleDateFormat("dd.MM.yy", Locale.getDefault()).format(income.getData());
         }
+
     }
 }

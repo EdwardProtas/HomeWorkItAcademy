@@ -9,6 +9,6 @@ public class IncomeMapper implements Function<IncomeEntity , Income> {
     @Override
     public Income apply(IncomeEntity input) {
         return new Income(input.getId() , input.getIncome(), input.getCurrencyIncome(),
-                input.getData() , input.getBill());
+                input.getData() , input.getBill(), input.getCategory());
     }
 }

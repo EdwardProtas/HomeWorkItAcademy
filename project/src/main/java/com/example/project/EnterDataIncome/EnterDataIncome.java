@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.EnterDataIncome;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,8 +18,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.project.MainActivity;
+import com.example.project.R;
+import com.example.project.domain.Income;
+import com.facebook.stetho.Stetho;
+
 import java.text.DateFormat;
 import java.text.FieldPosition;
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,6 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 public class EnterDataIncome extends Fragment {
 
@@ -36,6 +44,7 @@ public class EnterDataIncome extends Fragment {
     private EditText billCompleteTextView;
     private EditText amountCompleteTextView;
     private EditText dateCompleteTextView;
+    private TextView currencyCompleteTextView;
     private ImageView incomeBlack;
     private ImageView incomeSave;
     private Calendar selectedDate;
@@ -47,9 +56,7 @@ public class EnterDataIncome extends Fragment {
     private final static int MENU_PRESENT = 2;
     private final static int MENU_CASH = 3;
     private final static int MENU_MAP = 4;
-    public final static String DATE= "DATE";
-    public final static String AMOUNT= "AMOUNT";
-    public final static String CATEGORY= "CATEGORY";
+    private EnterDataIncomeViewModel enterDataIncomeViewModel;
 
     @Nullable
     @Override
@@ -62,11 +69,13 @@ public class EnterDataIncome extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mContext = (AppCompatActivity) getActivity();
         if (mContext != null) {
+            Stetho.initializeWithDefaults(mContext);
             categoryCompleteTextView = view.findViewById(R.id.categoryCompleteTextView);
             billCompleteTextView = view.findViewById(R.id.billCompleteTextView);
             amountCompleteTextView = view.findViewById(R.id.amountCompleteTextView);
             dateCompleteTextView = view.findViewById(R.id.dateCompleteTextView);
             viewForOpenContextMenu = view.findViewById(R.id.viewForOpenContextMenu);
+            currencyCompleteTextView = view.findViewById(R.id.currencyCompleteTextView);
             categoryViewForOpenContextMenu = view.findViewById(R.id.categoryViewForOpenContextMenu);
             incomeSave = view.findViewById(R.id.incomeSave);
             incomeBlack = view.findViewById(R.id.incomeBlack);
@@ -76,6 +85,8 @@ public class EnterDataIncome extends Fragment {
             initDate();
             clickDate();
             onBack();
+            initViewModel();
+            clickSave();
         }
     }
 
@@ -92,20 +103,6 @@ public class EnterDataIncome extends Fragment {
             registerForContextMenu(categoryViewForOpenContextMenu);
             mContext.openContextMenu(categoryViewForOpenContextMenu);
         });
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Intent intent  = new Intent();
-        intent.putExtra(DATE , dateCompleteTextView.getText().toString());
-        intent.putExtra(AMOUNT , amountCompleteTextView.getText().toString());
-        intent.putExtra(CATEGORY , categoryCompleteTextView.getText().toString());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DATE , dateCompleteTextView.getText().toString());
-        editor.putString(AMOUNT , amountCompleteTextView.getText().toString());
-        editor.putString(CATEGORY , categoryCompleteTextView.getText().toString());
-        editor.apply();
     }
 
     private void clickDate() {
@@ -131,9 +128,8 @@ public class EnterDataIncome extends Fragment {
     }
 
     private void initDate() {
-        dateCompleteTextView.setText(DateUtils.formatDateTime(mContext,
-                selectedDate.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yy" , Locale.getDefault());
+        dateCompleteTextView.setText(simpleDateFormat.format(selectedDate.getTime()));
     }
 
     @Override
@@ -172,5 +168,32 @@ public class EnterDataIncome extends Fragment {
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void initViewModel() {
+        enterDataIncomeViewModel = new ViewModelProvider(this , new EnterDataIncomeViewModelFactory(getContext()))
+                .get(EnterDataIncomeViewModel.class);
+    }
+
+    private void clickSave(){
+        incomeSave.setOnClickListener(view -> {
+            enterDataIncomeViewModel.saveIncome(new Income(amountCompleteTextView.getText().toString(),
+                    currencyCompleteTextView.getText().toString() , convert(dateCompleteTextView.getText().toString())
+                    ,billCompleteTextView.getText().toString(),
+                    categoryCompleteTextView.getText().toString()));
+            mContext.onBackPressed();
+        });
+    }
+
+    private Date convert(String s){
+        Date date = null;
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.getDefault());
+        try {
+            date = format.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+
     }
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/date_holder"
         android:layout_width="0dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.7"
         android:layout_height="wrap_content"
         android:hint="09.06.20"
         android:textSize="@dimen/def_magrin_text"
@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/coment_holder"
         android:layout_width="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.7"
         android:layout_height="wrap_content"
         android:hint="Работа"
         android:textColor="@android:color/black"
@@ -29,7 +29,7 @@
     <TextView
         android:id="@+id/cym_holder"
         android:layout_width="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:hint="3400"
         android:textSize="@dimen/def_magrin_text"

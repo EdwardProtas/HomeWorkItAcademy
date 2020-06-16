@@ -52,7 +52,7 @@ public class IncomeDataBaseRepositoryImp implements IncomeDataBaseRepository {
     }
 
     @Override
-    public LiveData<Income> getIncome(long id) {
+    public LiveData<Income> getIncomeId(long id) {
         return Transformations.map(incomeDao.getByIdIncome(id), input -> mapper.apply(input));
     }
 
@@ -69,14 +69,14 @@ public class IncomeDataBaseRepositoryImp implements IncomeDataBaseRepository {
     @Override
     public void addIncome(final Income income) {
         incomeExecutorService.execute(() ->
-                incomeDao.insert(new IncomeEntity(income.getIncome(), income.getCurrencyIncome(),
-                        income.getData() , income.getBill())));
+                incomeDao.insert(new IncomeEntity(income.getId(),income.getIncome(), income.getCurrencyIncome(),
+                        income.getData() , income.getBill() , income.getCategory())));
     }
 
     @Override
     public void deleteIncome(final Income income) {
         incomeExecutorService.execute(() ->
-                incomeDao.delete(new IncomeEntity(income.getIncome(), income.getCurrencyIncome(),
-                        income.getData(), income.getBill())));
+                incomeDao.delete(new IncomeEntity(income.getId(),income.getIncome(), income.getCurrencyIncome(),
+                        income.getData(), income.getBill(),income.getCategory())));
     }
 }

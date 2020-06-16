@@ -8,7 +8,11 @@ public class Converters {
 
     @TypeConverter
     public static long dateToLong(Date date) {
-        return date.getTime();
+        long d = 0;
+        if(date != null) {
+           d = date.getTime();
+        }
+        return d;
     }
 
     @TypeConverter

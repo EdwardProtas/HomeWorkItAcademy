@@ -81,6 +81,7 @@
             android:layout_marginTop="14dp"
             android:layout_marginLeft="@dimen/def_magrin_text"
             android:layout_marginRight="@dimen/def_magrin_text"/>
+
         <View
             android:id="@+id/viewForOpenContextMenu"
             android:layout_width="0dp"
@@ -106,11 +107,21 @@
     <EditText
         android:id="@+id/amountCompleteTextView"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="@dimen/def_magrin_text"
-        android:layout_marginRight="@dimen/def_magrin_text"/>
+        android:layout_marginRight="@dimen/magr10dp"/>
+
+        <TextView
+            android:id="@+id/currencyCompleteTextView"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
+            android:text="BY"
+            android:textSize="@dimen/def_magrin_text"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="@dimen/def_magrin_text"/>
 
 </LinearLayout>
 

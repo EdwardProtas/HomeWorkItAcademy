@@ -13,7 +13,7 @@ public interface IncomeDataBaseRepository {
 
     LiveData<List<Income>> getIncomeLiveData();
     Future<List<Income>> getIncome();
-    LiveData<Income> getIncome(long id);
+    LiveData<Income> getIncomeId(long id);
     LiveData<Income> getIncomeDate(long date);
     LiveData<Income> getIncomeBill(String bill);
     void addIncome(final Income income);

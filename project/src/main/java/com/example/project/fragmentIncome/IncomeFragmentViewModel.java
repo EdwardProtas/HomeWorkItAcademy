@@ -6,8 +6,10 @@ import com.example.project.repo.IncomeRepo.IncomeDataBaseRepository;
 import java.util.Date;
 import java.util.List;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 public class IncomeFragmentViewModel extends ViewModel {
@@ -22,16 +24,18 @@ public class IncomeFragmentViewModel extends ViewModel {
     IncomeFragmentViewModel(IncomeDataBaseRepository incomeDataBaseRepository, Income income) {
         this.incomeDataBaseRepository = incomeDataBaseRepository;
         this.income = income;
+        incomeListLiveData = (MutableLiveData<List<Income>>) incomeDataBaseRepository.getIncomeLiveData();
+
     }
 
     LiveData<List<Income>> getIncomeListLiveData() {
         return incomeListLiveData;
     }
 
+
     public LiveData<Long> getIncomeIdLiveData() {
         return incomeIdLiveData;
     }
-
     public LiveData<Date> getIncomeDateLiveData() {
         return incomeDateLiveData;
     }
@@ -52,13 +56,8 @@ public class IncomeFragmentViewModel extends ViewModel {
         incomeIdLiveData.setValue(id);
     }
 
-    void insert(Income income) {
-        incomeDataBaseRepository.addIncome(income);
-    }
-
-    void delete() {
-        incomeDataBaseRepository.deleteIncome(new Income(income.getId(), income.getIncome(),
-                income.getCurrencyIncome(), income.getData(), income.getBill()));
+    void delete(Income income) {
+        incomeDataBaseRepository.deleteIncome(income);
     }
 
 }

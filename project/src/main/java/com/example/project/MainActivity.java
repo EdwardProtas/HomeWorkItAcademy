@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.project.EnterDataIncome.EnterDataIncome;
 import com.example.project.fragmentAmount.AmountFragment;
 import com.example.project.fragmentExpenses.ExpensesFragment;
 import com.example.project.fragmentIncome.IncomeFragment;

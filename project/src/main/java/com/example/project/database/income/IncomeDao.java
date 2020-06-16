@@ -35,5 +35,5 @@ public interface IncomeDao {
     void insert(IncomeEntity incomeEntity);
 
     @Delete
-    void delete(IncomeEntity incomeEntity);
+    void delete(IncomeEntity... incomeEntity);
 }

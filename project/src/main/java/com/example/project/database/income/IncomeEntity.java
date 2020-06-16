@@ -16,16 +16,27 @@ public class IncomeEntity {
 
     @PrimaryKey(autoGenerate =  true)
     private long id;
-    private long income;
+    private String income;
     private String currencyIncome;
     private Date data;
     private String bill;
+    private String category;
 
-    public IncomeEntity(long income, String currencyIncome, Date data, String bill) {
+    public IncomeEntity(long id , String income, String currencyIncome, Date data, String bill, String category) {
+        this.id = id;
         this.income = income;
         this.currencyIncome = currencyIncome;
         this.data = data;
         this.bill = bill;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public long getId() {
@@ -36,11 +47,11 @@ public class IncomeEntity {
         this.id = id;
     }
 
-    public long getIncome() {
+    public String getIncome() {
         return income;
     }
 
-    public void setIncome(long income) {
+    public void setIncome(String income) {
         this.income = income;
     }
 

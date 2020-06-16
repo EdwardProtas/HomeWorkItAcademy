@@ -5,31 +5,38 @@ import java.util.Date;
 public class Income {
 
     private long id;
-    private long income;
+    private String income;
     private String currencyIncome;
     private Date data;
     private String bill;
+    private String category;
 
-    public Income(long id, long income, String currencyIncome, Date data, String bill) {
+    public Income(long id, String income, String currencyIncome, Date data, String bill, String category) {
         this.id = id;
         this.income = income;
         this.currencyIncome = currencyIncome;
         this.data = data;
         this.bill = bill;
+        this.category = category;
     }
 
-    public Income(long income, String currencyIncome, Date data, String bill) {
+    public Income(String income, String currencyIncome, Date data, String bill, String category) {
         this.income = income;
         this.currencyIncome = currencyIncome;
         this.data = data;
         this.bill = bill;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public long getId() {
         return id;
     }
 
-    public long getIncome() {
+    public String getIncome() {
         return income;
     }
 
