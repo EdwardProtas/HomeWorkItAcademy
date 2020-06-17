@@ -2,6 +2,7 @@ package com.example.project.fragmentMain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.project.MainActivity;
 import com.example.project.R;
+import com.example.project.fragmentIncome.IncomeFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +32,8 @@ public class MainFragment extends Fragment {
     private LinearLayout allIncome;
     private LinearLayout income;
     private LinearLayout expenses;
+    private TextView incomeTextViewMain;
+    private SharedPreferences mSharedPreferences;
 
     @Nullable
     @Override
@@ -43,12 +49,20 @@ public class MainFragment extends Fragment {
         allIncome = view.findViewById(R.id.allIncome);
         income = view.findViewById(R.id.income);
         expenses = view.findViewById(R.id.expenses);
-        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-        if (appCompatActivity != null) {
-            appCompatActivity.setSupportActionBar(toolbar);
-        }
+//        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+//        if (appCompatActivity != null) {
+//            appCompatActivity.setSupportActionBar(toolbar);
+//        }
         OnListener();
-
+        mActivity = getActivity();
+        if(mActivity!=null) {
+            mSharedPreferences = mActivity.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
+            incomeTextViewMain = view.findViewById(R.id.incomeTextViewMain);
+            String income = mSharedPreferences.getString(IncomeFragment.AMOIN_INCOME, "");
+            if (!income.equals("")) {
+                incomeTextViewMain.setText(income);
+            }
+        }
     }
 
     private void OnListener() {
@@ -57,16 +71,16 @@ public class MainFragment extends Fragment {
         expenses.setOnClickListener(view -> listenerButton.OnExpensesFragment());
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.menu, menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public interface ListenerButton {
         void OnAmountFragment();

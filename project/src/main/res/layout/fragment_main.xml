@@ -2,34 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorAccent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/def_magrin_text"
-        android:layout_marginTop="@dimen/magr10dp"
-        android:layout_marginLeft="@dimen/def_magrin_main_fragment"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <LinearLayout
         android:id="@+id/allIncome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/toolBar">
+        app:layout_constraintTop_toTopOf="parent">
 
     <ImageView
         android:id="@+id/homeIcon"
@@ -49,7 +31,6 @@
         android:textSize="@dimen/splash_screen_text_size"
         android:textColor="@android:color/tab_indicator_text"
         android:layout_marginTop="@dimen/def_magrin_text"
-
         android:layout_marginLeft="@dimen/def_magrin_main_fragment"
         />
 
@@ -84,7 +65,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/income"
             android:textSize="@dimen/splash_screen_text_size"
@@ -95,13 +76,26 @@
             />
 
         <TextView
+            android:id="@+id/incomeTextViewMain"
             android:layout_width="0dp"
-            android:layout_weight="1.2"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="34000 BY"
             android:textSize="@dimen/splash_screen_text_size"
-            android:textColor="@android:color/tab_indicator_text"
+            android:textColor="@android:color/holo_green_light"
             android:layout_marginTop="@dimen/def_magrin_text"
+            android:layout_marginRight="@dimen/magr10dp"
+            android:gravity="right"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:text="BY"
+            android:textSize="@dimen/splash_screen_text_size"
+            android:textColor="@android:color/holo_green_light"
+            android:layout_marginTop="@dimen/def_magrin_text"
+            android:layout_marginRight="@dimen/magr10dp"
             />
     </LinearLayout>
 

@@ -67,6 +67,11 @@ public class IncomeDataBaseRepositoryImp implements IncomeDataBaseRepository {
     }
 
     @Override
+    public LiveData<Income> getIncomeAmount(String income) {
+        return Transformations.map(incomeDao.getByAmounlIncome(income), input -> mapper.apply(input));
+    }
+
+    @Override
     public void addIncome(final Income income) {
         incomeExecutorService.execute(() ->
                 incomeDao.insert(new IncomeEntity(income.getId(),income.getIncome(), income.getCurrencyIncome(),

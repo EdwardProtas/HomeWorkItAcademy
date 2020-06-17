@@ -1,4 +1,4 @@
-package com.example.project.fragmentIncome;
+package com.example.project.fragmentIncome.TabLayoutFragments;
 
 import com.example.project.domain.Income;
 import com.example.project.repo.IncomeRepo.IncomeDataBaseRepository;
@@ -10,17 +10,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class IncomeFragmentViewModel extends ViewModel {
+public class DaysFragmentViewModel extends ViewModel {
 
     private IncomeDataBaseRepository incomeDataBaseRepository;
     private MutableLiveData<Long> incomeIdLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Income>> incomeListLiveData = new MutableLiveData<>();
     private MutableLiveData<Date> incomeDateLiveData = new MutableLiveData<>();
     private MutableLiveData<String> incomeStringLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> incomeStringAmountLiveData = new MutableLiveData<>();
     private Income income;
 
-    IncomeFragmentViewModel(IncomeDataBaseRepository incomeDataBaseRepository, Income income) {
+    DaysFragmentViewModel(IncomeDataBaseRepository incomeDataBaseRepository, Income income) {
         this.incomeDataBaseRepository = incomeDataBaseRepository;
         this.income = income;
         incomeListLiveData = (MutableLiveData<List<Income>>) incomeDataBaseRepository.getIncomeLiveData();
@@ -42,14 +41,6 @@ public class IncomeFragmentViewModel extends ViewModel {
         return incomeStringLiveData;
     }
 
-    public LiveData<String> getIncomeStringAmountLiveData() {
-        return incomeStringAmountLiveData;
-    }
-
-    void openStringAmountIncome(String amount) {
-        incomeStringAmountLiveData.setValue(amount);
-    }
-
     void openStringIncome(String bill) {
         incomeStringLiveData.setValue(bill);
     }
@@ -65,5 +56,4 @@ public class IncomeFragmentViewModel extends ViewModel {
     void delete(Income income) {
         incomeDataBaseRepository.deleteIncome(income);
     }
-
 }

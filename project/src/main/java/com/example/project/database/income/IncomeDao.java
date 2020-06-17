@@ -31,6 +31,9 @@ public interface IncomeDao {
     @Query("SELECT * FROM income WHERE bill = :bill")
     LiveData<IncomeEntity> getByBillIncome(String bill);
 
+    @Query("SELECT * FROM income WHERE income = :income")
+    LiveData<IncomeEntity> getByAmounlIncome(String income);
+
     @Insert(onConflict = REPLACE)
     void insert(IncomeEntity incomeEntity);
 

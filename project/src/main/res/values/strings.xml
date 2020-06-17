@@ -6,6 +6,8 @@
     <string name="expenses">Расходы</string>
     <string name="сurrencies">Валюты</string>
     <string name="allIncome">Сумма</string>
+    <string name="all">Все</string>
+    <string name="days">Дни</string>
     <string name="category">Категория</string>
     <string name="bill">Счет</string>
     <string name="date">Дата</string>
@@ -14,4 +16,9 @@
     <string name="karta">Карта</string>
     <string name="job">Работа</string>
     <string name="present">Подарки</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

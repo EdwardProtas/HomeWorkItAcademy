@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/main"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:orderInCategory="100"
+            android:title="@string/main"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/incomeMenu"
+            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:orderInCategory="100"
+            android:title="@string/income"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/expensesMenu"
+            android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+            android:orderInCategory="100"
+            android:title="@string/expenses"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/сurrencies"
+            android:orderInCategory="100"
+            android:title="@string/сurrencies"
+            app:showAsAction="never" />
+    </group>
+</menu>

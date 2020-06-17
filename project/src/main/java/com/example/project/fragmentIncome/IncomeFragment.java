@@ -1,6 +1,8 @@
 package com.example.project.fragmentIncome;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,36 +12,49 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.example.project.MainActivity;
 import com.example.project.R;
 import com.example.project.domain.Income;
 
+import com.example.project.fragmentIncome.TabLayoutFragments.AllFragment;
+import com.example.project.fragmentIncome.TabLayoutFragments.PagerAdapterIncome;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class IncomeFragment extends Fragment {
 
     private IncomeFragmentViewModel incomeFragmentViewModel;
-    private RecyclerView recyclerView;
-    private IncomeAdapter incomeAdapter;
     private FloatingActionButton buttonAddIncome;
     private TextView amoinIncome;
-    private Context mContext;
+    private Activity mContext;
     private ListenerButtonAddIncome listenerButtonAddIncome;
     private SharedPreferences sharedPreferences;
-
+    public static final String AMOIN_INCOME = "AMOIN_INCOME";
+    private TabLayout tabLayoutIncome;
+    private TabItem allTabItem;
+    private TabItem daysTabItem;
+    private TabItem categoryTabItem;
+    private ViewPager viewPagerIncome;
 
     @Nullable
     @Override
@@ -51,29 +66,32 @@ public class IncomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        amoinIncome = view.findViewById(R.id.amoinIncome);
-        initRecyclerView(view);
-        buttonAddIncome(view);
-        initViewModel();
-        itemTouchDelete();
-        amountIncomeAdapter();
-
-    }
-
-    private void buttonAddIncome(View view) {
-        buttonAddIncome = view.findViewById(R.id.buttonAddIncome);
-        buttonAddIncome.setOnClickListener(view1 -> listenerButtonAddIncome.OnListenerButtonAddIncome());
-    }
-
-    private void initRecyclerView(@NonNull View view) {
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(new IncomeAdapter());
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
-        incomeAdapter = (IncomeAdapter) recyclerView.getAdapter();
-    }
-
-    public interface ListenerButtonAddIncome {
-        void OnListenerButtonAddIncome();
+        mContext = getActivity();
+        if (mContext != null) {
+            amoinIncome = view.findViewById(R.id.amoinIncome);
+            tabLayoutIncome = view.findViewById(R.id.tabLayoutIncome);
+            allTabItem = view.findViewById(R.id.allTabItem);
+            daysTabItem = view.findViewById(R.id.daysTabItem);
+            categoryTabItem = view.findViewById(R.id.categoryTabItem);
+            viewPagerIncome = view.findViewById(R.id.viewPagerIncome);
+            PagerAdapterIncome pagerAdapter = new PagerAdapterIncome(getChildFragmentManager(), tabLayoutIncome.getTabCount());
+            viewPagerIncome.setAdapter(pagerAdapter);
+            tabLayoutIncome.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    viewPagerIncome.setCurrentItem(tab.getPosition());
+                }
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+                }
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+                }
+            });
+            sharedPreferences = mContext.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
+            buttonAddIncome(view);
+            initViewModel();
+        }
     }
 
     @Override
@@ -84,47 +102,39 @@ public class IncomeFragment extends Fragment {
         }
     }
 
+    public interface ListenerButtonAddIncome {
+        void OnListenerButtonAddIncome();
+    }
+
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        listenerButtonAddIncome = null;
+    public void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AMOIN_INCOME, amoinIncome.getText().toString());
+        editor.apply();
+    }
+
+    private void buttonAddIncome(View view) {
+        buttonAddIncome = view.findViewById(R.id.buttonAddIncome);
+        buttonAddIncome.setOnClickListener(view1 -> listenerButtonAddIncome.OnListenerButtonAddIncome());
     }
 
     private void initViewModel() {
         if (getActivity() != null) {
             incomeFragmentViewModel = new ViewModelProvider(this, new IncomeFragmentViewModelFactory(getContext()))
                     .get(IncomeFragmentViewModel.class);
-            incomeFragmentViewModel.getIncomeListLiveData().observe(getViewLifecycleOwner(), incomes ->
-                    incomeAdapter.setIncomeList(incomes));
-
+           incomeFragmentViewModel.getIncomeStringAmountLiveData().observe(getViewLifecycleOwner() , this::amout);
         }
     }
 
-    private void itemTouchDelete() {
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                incomeFragmentViewModel.delete(incomeAdapter.getIncomeAt(viewHolder.getAdapterPosition()));
-            }
-        }).attachToRecyclerView(recyclerView);
+    private void amout(String s) {
+        amoinIncome.setText(s);
     }
 
-    private void amountIncomeAdapter() {
-        incomeFragmentViewModel.getIncomeListLiveData().observe(getViewLifecycleOwner(), new Observer<List<Income>>() {
-            @Override
-            public void onChanged(List<Income> incomes) {
-                int d = 0;
-                for (int i = 0; i < incomes.size(); i++) {
-                    int w = Integer.parseInt(incomes.get(i).getIncome());
-                    d += w;
-                }
-                amoinIncome.setText(String.valueOf("+ " + d));
-            }
-        });
-    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        listenerButtonAddIncome = null;
+    }
 }
