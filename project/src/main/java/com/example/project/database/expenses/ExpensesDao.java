@@ -24,10 +24,13 @@ public interface ExpensesDao {
     LiveData<ExpensesEntity> getByIdExpenses(long id);
 
     @Query("SELECT * FROM expenses WHERE data = :data")
-    LiveData<ExpensesEntity> getByDateExpenses(long data);
+    LiveData<List<ExpensesEntity>> getByDateExpenses(long data);
 
   @Query("SELECT * FROM expenses WHERE bill = :bill")
-    LiveData<ExpensesEntity> getByBillExpenses(String bill);
+    LiveData<List<ExpensesEntity>> getByBillExpenses(String bill);
+
+    @Query("SELECT * FROM expenses WHERE category = :category")
+    LiveData<List<ExpensesEntity>> getByCategoryExpenses(String category);
 
     @Insert(onConflict = REPLACE)
     void insert(ExpensesEntity expensesEntity);

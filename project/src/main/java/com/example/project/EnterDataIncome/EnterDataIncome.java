@@ -2,17 +2,16 @@ package com.example.project.EnterDataIncome;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.util.Log;
+
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
+
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,10 +22,8 @@ import com.example.project.R;
 import com.example.project.domain.Income;
 import com.facebook.stetho.Stetho;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
 import java.text.ParseException;
-import java.text.ParsePosition;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

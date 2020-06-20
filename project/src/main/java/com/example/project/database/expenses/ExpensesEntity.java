@@ -16,16 +16,27 @@ public class ExpensesEntity {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    private long expenses;
+    private String expenses;
     private String currencyExpenses;
     private Date data;
     private String bill;
+    private String category;
 
-    public ExpensesEntity(long expenses, String currencyExpenses, Date data, String bill) {
+    public ExpensesEntity(long id, String expenses, String currencyExpenses, Date data, String bill, String category) {
+        this.id = id;
         this.expenses = expenses;
         this.currencyExpenses = currencyExpenses;
         this.data = data;
         this.bill = bill;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public long getId() {
@@ -36,11 +47,11 @@ public class ExpensesEntity {
         this.id = id;
     }
 
-    public long getExpenses() {
+    public String getExpenses() {
         return expenses;
     }
 
-    public void setExpenses(long expenses) {
+    public void setExpenses(String expenses) {
         this.expenses = expenses;
     }
 

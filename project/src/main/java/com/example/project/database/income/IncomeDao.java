@@ -26,13 +26,13 @@ public interface IncomeDao {
     LiveData<IncomeEntity> getByIdIncome(long id);
 
     @Query("SELECT * FROM income WHERE data = :data")
-    LiveData<IncomeEntity> getByDateIncome(long data);
+    LiveData<List<IncomeEntity>> getByDateIncome(long data);
 
     @Query("SELECT * FROM income WHERE bill = :bill")
-    LiveData<IncomeEntity> getByBillIncome(String bill);
+    LiveData<List<IncomeEntity>> getByBillIncome(String bill);
 
-    @Query("SELECT * FROM income WHERE income = :income")
-    LiveData<IncomeEntity> getByAmounlIncome(String income);
+    @Query("SELECT * FROM income WHERE category = :category")
+    LiveData<List<IncomeEntity>> getByCategoryIncome(String category);
 
     @Insert(onConflict = REPLACE)
     void insert(IncomeEntity incomeEntity);

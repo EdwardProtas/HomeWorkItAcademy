@@ -14,9 +14,9 @@ public interface IncomeDataBaseRepository {
     LiveData<List<Income>> getIncomeLiveData();
     Future<List<Income>> getIncome();
     LiveData<Income> getIncomeId(long id);
-    LiveData<Income> getIncomeDate(long date);
-    LiveData<Income> getIncomeBill(String bill);
-    LiveData<Income> getIncomeAmount(String income);
+    LiveData<List<Income>> getIncomeDate(long date);
+    LiveData<List<Income>>getIncomeBill(String bill);
+    LiveData<List<Income>>getIncomeCategory(String category);
     void addIncome(final Income income);
     void deleteIncome(final Income income);
 }

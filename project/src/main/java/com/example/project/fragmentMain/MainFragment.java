@@ -16,8 +16,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.project.EnterDataExpenses.EnterDataExpenses;
+import com.example.project.EnterDataIncome.EnterDataIncome;
 import com.example.project.MainActivity;
 import com.example.project.R;
+import com.example.project.fragmentAmount.AmountFragment;
+import com.example.project.fragmentExpenses.ExpensesFragment;
 import com.example.project.fragmentIncome.IncomeFragment;
 
 import androidx.annotation.NonNull;
@@ -33,6 +37,11 @@ public class MainFragment extends Fragment {
     private LinearLayout income;
     private LinearLayout expenses;
     private TextView incomeTextViewMain;
+    private TextView currMain;
+    private TextView expensesTextViewMain;
+    private TextView currMainEx;
+    private TextView amountCurrMain;
+    private TextView amountTextViewMain;
     private SharedPreferences mSharedPreferences;
 
     @Nullable
@@ -44,24 +53,49 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setHasOptionsMenu(true);
-        Toolbar toolbar = view.findViewById(R.id.toolBar);
-        allIncome = view.findViewById(R.id.allIncome);
-        income = view.findViewById(R.id.income);
-        expenses = view.findViewById(R.id.expenses);
-//        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-//        if (appCompatActivity != null) {
-//            appCompatActivity.setSupportActionBar(toolbar);
-//        }
-        OnListener();
         mActivity = getActivity();
-        if(mActivity!=null) {
-            mSharedPreferences = mActivity.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
+        if (mActivity != null) {
+            setHasOptionsMenu(true);
+            allIncome = view.findViewById(R.id.allIncome);
+            amountTextViewMain = view.findViewById(R.id.amountTextViewMain);
+            amountCurrMain = view.findViewById(R.id.amountCurrMain);
+            income = view.findViewById(R.id.income);
+            expenses = view.findViewById(R.id.expenses);
+            currMain = view.findViewById(R.id.currMain);
+            expensesTextViewMain = view.findViewById(R.id.expensesTextViewMain);
+            currMainEx = view.findViewById(R.id.currMainEx);
             incomeTextViewMain = view.findViewById(R.id.incomeTextViewMain);
-            String income = mSharedPreferences.getString(IncomeFragment.AMOIN_INCOME, "");
-            if (!income.equals("")) {
-                incomeTextViewMain.setText(income);
-            }
+            setHasOptionsMenu(true);
+            OnListener();
+            Toolbar toolbar1 = getActivity().findViewById(R.id.toolBar);
+            toolbar1.setTitle("Главная");
+        }
+    }
+
+    @Override
+    public void onStart() {
+        allSharedPreferences();
+
+        super.onStart();
+    }
+
+
+    private void allSharedPreferences() {
+        mSharedPreferences = mActivity.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
+        String income = mSharedPreferences.getString(IncomeFragment.AMOIN_INCOME, "");
+        if (!income.equals("")) {
+            incomeTextViewMain.setText(income);
+            currMain.setVisibility(View.VISIBLE);
+        }
+        String expenses = mSharedPreferences.getString(ExpensesFragment.AMOIN_EXPENSES, "");
+        if (!income.equals("")) {
+            expensesTextViewMain.setText(expenses);
+            currMainEx.setVisibility(View.VISIBLE);
+        }
+        String amount = mSharedPreferences.getString(AmountFragment.AMOUN_All, "");
+        if (!amount.equals("")) {
+            amountTextViewMain.setText(amount);
+            amountCurrMain.setVisibility(View.VISIBLE);
         }
     }
 
@@ -71,20 +105,17 @@ public class MainFragment extends Fragment {
         expenses.setOnClickListener(view -> listenerButton.OnExpensesFragment());
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.menu, menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main , menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     public interface ListenerButton {
         void OnAmountFragment();
+
         void OnIncomeFragment();
+
         void OnExpensesFragment();
     }
 
@@ -101,4 +132,5 @@ public class MainFragment extends Fragment {
         super.onDestroy();
         listenerButton = null;
     }
+
 }

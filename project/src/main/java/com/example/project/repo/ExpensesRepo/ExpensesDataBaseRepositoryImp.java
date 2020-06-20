@@ -27,8 +27,8 @@ public class ExpensesDataBaseRepositoryImp implements ExpensesDataBaseRepository
 
     public ExpensesDataBaseRepositoryImp(@NonNull final Context context, Function<ExpensesEntity, Expenses> mapper) {
         ExpensesDataBase expensesDataBase = ExpensesDataBase.getInstance(context);
-        this.expensesExecutorService = expensesDataBase.getExpensesDataBaseExecutorService();
         this.expensesDao = expensesDataBase.getExpensesDao();
+        this.expensesExecutorService = expensesDataBase.getExpensesDataBaseExecutorService();
         this.mapper = mapper;
     }
 
@@ -50,26 +50,34 @@ public class ExpensesDataBaseRepositoryImp implements ExpensesDataBaseRepository
     }
 
     @Override
-    public LiveData<Expenses> getExpensesDate(long date) {
-        return Transformations.map(expensesDao.getByDateExpenses(date), input -> mapper.apply(input));
+    public LiveData<List<Expenses>> getExpensesDate(long date) {
+        return Transformations.map(expensesDao.getByDateExpenses(date), input ->
+                input.stream().map(mapper).collect(Collectors.toList()));
     }
 
     @Override
-    public LiveData<Expenses> getExpensesBill(String bill) {
-        return Transformations.map(expensesDao.getByBillExpenses(bill), input -> mapper.apply(input));
+    public LiveData<List<Expenses>> getExpensesBill(String bill) {
+        return Transformations.map(expensesDao.getByBillExpenses(bill),
+                input -> input.stream().map(mapper).collect(Collectors.toList()));
+    }
+
+    @Override
+    public LiveData<List<Expenses>> getExpensesCategory(String category) {
+        return Transformations.map(expensesDao.getByCategoryExpenses(category),
+                input -> input.stream().map(mapper).collect(Collectors.toList()));
     }
 
     @Override
     public void addExpenses(final Expenses expenses) {
         expensesExecutorService.submit(() ->
-                expensesDao.insert(new ExpensesEntity(expenses.getExpenses(), expenses.getCurrencyExpenses(),
-                        expenses.getData(),expenses.getBill())));
+                expensesDao.insert(new ExpensesEntity(expenses.getId(), expenses.getExpenses(), expenses.getCurrencyExpenses(),
+                        expenses.getData(),expenses.getBill() , expenses.getCategory())));
     }
 
     @Override
     public void deleteExpenses(final Expenses expenses) {
         expensesExecutorService.submit(() ->
-                expensesDao.delete(new ExpensesEntity(expenses.getExpenses(), expenses.getCurrencyExpenses(),
-                        expenses.getData(),expenses.getBill())));
+                expensesDao.delete(new ExpensesEntity(expenses.getId(),expenses.getExpenses(), expenses.getCurrencyExpenses(),
+                        expenses.getData(),expenses.getBill(),expenses.getCategory())));
     }
 }

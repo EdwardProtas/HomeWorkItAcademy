@@ -2,7 +2,7 @@ package com.example.project.repo.IncomeRepo;
 
 import android.content.Context;
 
-import com.example.project.database.expenses.ExpensesEntity;
+
 import com.example.project.database.income.IncomeDao;
 import com.example.project.database.income.IncomeDataBase;
 import com.example.project.database.income.IncomeEntity;
@@ -57,19 +57,23 @@ public class IncomeDataBaseRepositoryImp implements IncomeDataBaseRepository {
     }
 
     @Override
-    public LiveData<Income> getIncomeDate(long date) {
-        return Transformations.map(incomeDao.getByDateIncome(date), input -> mapper.apply(input));
+    public LiveData<List<Income>> getIncomeDate(long date) {
+        return Transformations.map(incomeDao.getByDateIncome(date), input ->
+                input.stream().map(mapper).collect(Collectors.toList()));
     }
 
     @Override
-    public LiveData<Income> getIncomeBill(String bill) {
-        return Transformations.map(incomeDao.getByBillIncome(bill), input -> mapper.apply(input));
+    public LiveData<List<Income>> getIncomeBill(String bill) {
+        return Transformations.map(incomeDao.getByBillIncome(bill), input ->
+                input.stream().map(mapper).collect(Collectors.toList()));
     }
 
     @Override
-    public LiveData<Income> getIncomeAmount(String income) {
-        return Transformations.map(incomeDao.getByAmounlIncome(income), input -> mapper.apply(input));
+    public LiveData<List<Income>> getIncomeCategory(String category) {
+        return Transformations.map(incomeDao.getByCategoryIncome(category), input ->
+                input.stream().map(mapper).collect(Collectors.toList()));
     }
+
 
     @Override
     public void addIncome(final Income income) {

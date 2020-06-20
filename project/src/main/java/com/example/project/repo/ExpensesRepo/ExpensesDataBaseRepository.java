@@ -14,8 +14,9 @@ public interface ExpensesDataBaseRepository {
     LiveData<List<Expenses>> getExpensesLiveData();
     Future<List<Expenses>> getExpenses();
     LiveData<Expenses> getExpensesId(long id);
-    LiveData<Expenses> getExpensesDate(long date);
-    LiveData<Expenses> getExpensesBill(String bill);
+    LiveData<List<Expenses>> getExpensesDate(long date);
+    LiveData<List<Expenses>> getExpensesBill(String bill);
+    LiveData<List<Expenses>>getExpensesCategory(String category);
     void addExpenses(final Expenses expenses);
     void deleteExpenses(final Expenses expenses);
 

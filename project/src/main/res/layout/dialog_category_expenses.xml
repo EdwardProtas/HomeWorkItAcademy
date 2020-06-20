@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RadioGroup
+        android:id="@+id/radioCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioutilities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <RadioButton
+            android:id="@+id/radiophone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radioutilities"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <RadioButton
+            android:id="@+id/radiointernet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radiophone"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioButton
+            android:id="@+id/radiotransport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radiointernet"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioButton
+            android:id="@+id/radiosupermarket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radiotransport"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioButton
+            android:id="@+id/radiomedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radiosupermarket"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioButton
+            android:id="@+id/radioclothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radiomedicine"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioButton
+            android:id="@+id/radiocafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radioclothing"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <RadioButton
+            android:id="@+id/radioother"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="@dimen/def_magrin"
+            android:layout_marginLeft="@dimen/def_magrin"
+            app:layout_constraintTop_toBottomOf="@id/radiocafe"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/utilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilities"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/splash_screen_dimen"
+        android:layout_marginTop="@dimen/def_magrin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"/>
+
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/splash_screen_dimen"
+        android:layout_marginTop="@dimen/def_magrin"
+        app:layout_constraintTop_toBottomOf="@id/utilities"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"/>
+
+    <TextView
+        android:id="@+id/internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/internet"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/splash_screen_dimen"
+        android:layout_marginTop="@dimen/def_magrin"
+        app:layout_constraintTop_toBottomOf="@id/phone"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"/>
+
+
+    <TextView
+        android:id="@+id/transport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transport"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/splash_screen_dimen"
+        android:layout_marginTop="@dimen/def_magrin"
+        app:layout_constraintTop_toBottomOf="@id/internet"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"/>
+
+    <TextView
+        android:id="@+id/supermarket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/supermarket"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/def_magrin_text"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"
+        app:layout_constraintTop_toBottomOf="@id/transport" />
+
+    <TextView
+        android:id="@+id/medicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/medicine"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/def_magrin_text"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"
+        app:layout_constraintTop_toBottomOf="@id/supermarket" />
+
+    <TextView
+        android:id="@+id/clothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clothing"
+        android:textSize="@dimen/def_magrin_text"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/splash_screen_dimen"
+        android:layout_marginTop="@dimen/def_magrin"
+        app:layout_constraintTop_toBottomOf="@id/medicine"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"/>
+
+    <TextView
+        android:id="@+id/cafe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/cafe"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/def_magrin_text"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"
+        app:layout_constraintTop_toBottomOf="@id/clothing" />
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/splash_screen_dimen"
+        android:layout_marginTop="16dp"
+        android:text="@string/other"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/def_magrin_text"
+        app:layout_constraintLeft_toRightOf="@id/radioCategory"
+        app:layout_constraintTop_toBottomOf="@id/cafe" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

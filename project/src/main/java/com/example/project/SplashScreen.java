@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static final int LEHGHT_DISPLAY_SPLASH = 3000;
+    private static final int LEHGHT_DISPLAY_SPLASH = 1000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,13 +19,10 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void initSplashScreen() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         },LEHGHT_DISPLAY_SPLASH );
     }
 }

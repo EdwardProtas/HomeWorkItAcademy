@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider;
 public class DaysFragmentViewModelFactory implements ViewModelProvider.Factory {
 
     private Context mContext;
-    private Income mIncome;
 
     public DaysFragmentViewModelFactory(Context context) {
         mContext = context;
@@ -24,7 +23,7 @@ public class DaysFragmentViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.equals(DaysFragmentViewModel.class)) {
-            return (T) new DaysFragmentViewModel(getIncomeDataBaseRepository() , mIncome);
+            return (T) new DaysFragmentViewModel(getIncomeDataBaseRepository() );
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
 

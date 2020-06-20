@@ -11,17 +11,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class CategoryViewModel extends ViewModel {
-
     private IncomeDataBaseRepository incomeDataBaseRepository;
     private MutableLiveData<Long> incomeIdLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Income>> incomeListLiveData = new MutableLiveData<>();
-    private MutableLiveData<Date> incomeDateLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> incomeStringLiveData = new MutableLiveData<>();
-    private Income income;
+    private MutableLiveData<Long> incomeDateLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> incomeBillLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> incomeCategoryLiveData = new MutableLiveData<>();
 
-    CategoryViewModel(IncomeDataBaseRepository incomeDataBaseRepository, Income income) {
+    CategoryViewModel(IncomeDataBaseRepository incomeDataBaseRepository) {
         this.incomeDataBaseRepository = incomeDataBaseRepository;
-        this.income = income;
         incomeListLiveData = (MutableLiveData<List<Income>>) incomeDataBaseRepository.getIncomeLiveData();
     }
 
@@ -33,20 +31,28 @@ public class CategoryViewModel extends ViewModel {
         return incomeIdLiveData;
     }
 
-    public LiveData<Date> getIncomeDateLiveData() {
-        return incomeDateLiveData;
+    public LiveData<List<Income>> getIncomeDateLiveData(Long s) {
+        return incomeDataBaseRepository.getIncomeDate(s);
     }
 
-    public LiveData<String> getIncomeStringLiveData() {
-        return incomeStringLiveData;
+    public LiveData<List<Income>> getIncomeBillLiveData(String bill) {
+        return incomeDataBaseRepository.getIncomeBill(bill);
     }
 
-    void openStringIncome(String bill) {
-        incomeStringLiveData.setValue(bill);
+    public LiveData<List<Income>> getIncomeCategoryLiveData(String category) {
+        return incomeDataBaseRepository.getIncomeCategory(category);
     }
 
-    void openDateIncome(Date date) {
-        incomeDateLiveData.setValue(date);
+    public void setIncomeCategoryLiveData(String categoryLiveData) {
+        this.incomeCategoryLiveData.setValue(categoryLiveData);
+    }
+
+    public void setIncomeDateLiveData(Long date) {
+        this.incomeDateLiveData.setValue(date);
+    }
+
+    public void setIncomeBillLiveData(String incomeStringLiveData) {
+        this.incomeBillLiveData.setValue(incomeStringLiveData);
     }
 
     void openIdIncome(long id) {

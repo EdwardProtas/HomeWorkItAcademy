@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Главная</string>
+    <string name="app_name">Доходы и Расходы</string>
     <string name="splash_screen_text">From Eduard Protas</string>
     <string name="income">Доходы</string>
     <string name="main">Главная</string>
@@ -9,8 +9,11 @@
     <string name="all">Все</string>
     <string name="days">Дни</string>
     <string name="category">Категория</string>
+    <string name="byCategory">По категориям</string>
     <string name="bill">Счет</string>
+    <string name="byBill">По счетам</string>
     <string name="date">Дата</string>
+    <string name="byDate">По датe</string>
     <string name="intfo">Итого</string>
     <string name="cash">Наличные</string>
     <string name="karta">Карта</string>
@@ -18,7 +21,14 @@
     <string name="present">Подарки</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+    <string name="utilities">Kоммунальные</string>
+    <string name="phone">Телефон</string>
+    <string name="internet">Интернет</string>
+    <string name="transport">Транспорт</string>
+    <string name="supermarket">Супермаркет</string>
+    <string name="medicine">Медицина</string>
+    <string name="clothing">Одежда</string>
+    <string name="cafe">Кафе</string>
+    <string name="other">Прочие</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,9 +1,8 @@
-package com.example.project.fragmentIncome;
+package com.example.project.fragmentIncome.TabLayoutFragments;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.project.R;
@@ -11,7 +10,6 @@ import com.example.project.domain.Income;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 

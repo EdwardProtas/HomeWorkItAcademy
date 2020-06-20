@@ -6,20 +6,12 @@
     android:background="@android:color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorAccent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
     <LinearLayout
         android:id="@+id/fragment_bill_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/toolBar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="0dp"
@@ -33,13 +25,27 @@
             />
 
         <TextView
+            android:id="@+id/amoinAll"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="34000 BY"
             android:textColor="@android:color/black"
             android:textSize="@dimen/splash_screen_text_size"
             android:layout_marginTop="@dimen/def_magrin_text"
+            android:layout_marginRight="@dimen/magr10dp"
+            android:gravity="right"
+            />
+
+        <TextView
+            android:id="@+id/currenceAmoinAll"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="BY"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/splash_screen_text_size"
+            android:layout_marginTop="@dimen/def_magrin_text"
+            android:visibility="invisible"
             />
     </LinearLayout>
 
@@ -60,6 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/view">
 
         <TextView
+            android:id="@+id/nal"
             android:layout_width="0dp"
             android:layout_weight="1.5"
             android:layout_height="wrap_content"
@@ -71,13 +78,27 @@
             />
 
         <TextView
+            android:id="@+id/cashAll"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="34000 BY"
             android:textColor="@android:color/black"
             android:textSize="@dimen/splash_screen_text_size"
             android:layout_marginTop="@dimen/def_magrin_text"
+            android:layout_marginRight="@dimen/magr10dp"
+            android:gravity="right"
+            />
+
+        <TextView
+            android:id="@+id/cashCurrenceAmoinAll"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="BY"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/splash_screen_text_size"
+            android:layout_marginTop="@dimen/def_magrin_text"
+            android:visibility="invisible"
             />
     </LinearLayout>
 
@@ -90,6 +111,7 @@
         app:layout_constraintTop_toBottomOf="@id/fragment_bill_linear_cash">
 
         <TextView
+            android:id="@+id/kar"
             android:layout_width="0dp"
             android:layout_weight="1.5"
             android:layout_height="wrap_content"
@@ -101,26 +123,28 @@
             />
 
         <TextView
+            android:id="@+id/kartAll"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="34000 BY"
             android:textColor="@android:color/black"
             android:textSize="@dimen/splash_screen_text_size"
             android:layout_marginTop="@dimen/def_magrin_text"
+            android:layout_marginRight="@dimen/magr10dp"
+            android:gravity="right"
+            />
+
+        <TextView
+            android:id="@+id/kartaCurrenceAmoinAll"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="BY"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/splash_screen_text_size"
+            android:layout_marginTop="@dimen/def_magrin_text"
+            android:visibility="invisible"
             />
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/buttonAddBill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/def_magrin_text"
-        android:background="@color/colorAccent"
-        android:src="@drawable/ic_add_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:fabSize="auto"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

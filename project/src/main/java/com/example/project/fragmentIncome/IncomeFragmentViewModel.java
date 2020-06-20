@@ -1,6 +1,9 @@
 package com.example.project.fragmentIncome;
 
+import android.util.Log;
+
 import com.example.project.domain.Income;
+import com.example.project.fragmentMain.MainFragment;
 import com.example.project.repo.IncomeRepo.IncomeDataBaseRepository;
 
 import java.util.Date;
@@ -15,14 +18,13 @@ public class IncomeFragmentViewModel extends ViewModel {
     private IncomeDataBaseRepository incomeDataBaseRepository;
     private MutableLiveData<Long> incomeIdLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Income>> incomeListLiveData = new MutableLiveData<>();
-    private MutableLiveData<Date> incomeDateLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> incomeStringLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> incomeStringAmountLiveData = new MutableLiveData<>();
-    private Income income;
+    private MutableLiveData<Long> incomeDateLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> incomeBillLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> incomeCategoryLiveData = new MutableLiveData<>();
 
-    IncomeFragmentViewModel(IncomeDataBaseRepository incomeDataBaseRepository, Income income) {
+
+    IncomeFragmentViewModel(IncomeDataBaseRepository incomeDataBaseRepository) {
         this.incomeDataBaseRepository = incomeDataBaseRepository;
-        this.income = income;
         incomeListLiveData = (MutableLiveData<List<Income>>) incomeDataBaseRepository.getIncomeLiveData();
     }
 
@@ -34,36 +36,32 @@ public class IncomeFragmentViewModel extends ViewModel {
         return incomeIdLiveData;
     }
 
-    public LiveData<Date> getIncomeDateLiveData() {
-        return incomeDateLiveData;
+    public LiveData<List<Income>> getIncomeDateLiveData(Long s) {
+        return incomeDataBaseRepository.getIncomeDate(s);
     }
 
-    public LiveData<String> getIncomeStringLiveData() {
-        return incomeStringLiveData;
+    public LiveData<List<Income>> getIncomeBillLiveData(String bill) {
+        return incomeDataBaseRepository.getIncomeBill(bill);
     }
 
-    public LiveData<String> getIncomeStringAmountLiveData() {
-        return incomeStringAmountLiveData;
+    public LiveData<List<Income>> getIncomeCategoryLiveData(String category) {
+        return incomeDataBaseRepository.getIncomeCategory(category);
     }
 
-    void openStringAmountIncome(String amount) {
-        incomeStringAmountLiveData.setValue(amount);
+    public void setIncomeCategoryLiveData(String categoryLiveData) {
+        this.incomeCategoryLiveData.setValue(categoryLiveData);
     }
 
-    void openStringIncome(String bill) {
-        incomeStringLiveData.setValue(bill);
+    public void setIncomeDateLiveData(Long date) {
+        this.incomeDateLiveData.setValue(date);
     }
 
-    void openDateIncome(Date date) {
-        incomeDateLiveData.setValue(date);
+    public void setIncomeBillLiveData(String incomeStringLiveData) {
+        this.incomeBillLiveData.setValue(incomeStringLiveData);
     }
 
     void openIdIncome(long id) {
         incomeIdLiveData.setValue(id);
-    }
-
-    void delete(Income income) {
-        incomeDataBaseRepository.deleteIncome(income);
     }
 
 }

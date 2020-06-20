@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 public class AllFragmentViewModelFactory implements ViewModelProvider.Factory {
 
     private Context mContext;
-    private Income mIncome;
+
 
     public AllFragmentViewModelFactory(Context context) {
         mContext = context;
@@ -25,7 +25,7 @@ public class AllFragmentViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.equals(AllFragmentViewModel.class)) {
-            return (T) new AllFragmentViewModel(getIncomeDataBaseRepository() , mIncome);
+            return (T) new AllFragmentViewModel(getIncomeDataBaseRepository() );
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
 

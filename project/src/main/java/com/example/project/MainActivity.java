@@ -6,12 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-
-import androidx.appcompat.widget.ActionBarContextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.project.EnterDataExpenses.EnterDataExpenses;
 import com.example.project.EnterDataIncome.EnterDataIncome;
 import com.example.project.fragmentAmount.AmountFragment;
 import com.example.project.fragmentExpenses.ExpensesFragment;
@@ -19,17 +18,20 @@ import com.example.project.fragmentIncome.IncomeFragment;
 import com.example.project.fragmentMain.MainFragment;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.ListenerButton, IncomeFragment.ListenerButtonAddIncome,
+public class MainActivity extends AppCompatActivity implements MainFragment.ListenerButton,
+        IncomeFragment.ListenerButtonAddIncome,ExpensesFragment.ListenerButtonAddExpenses,
         NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer_layout;
     public static final String MAIN_ACTINITY = "MAINACTINITY";
+//    public static  String MAIN_INCOME = "MAIN_INCOME";
+    private  Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolBar);
+        toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         drawer_layout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -41,12 +43,13 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
         if(savedInstanceState == null) {
             initMainFragment();
         }
+        toolbar.setTitle("Главная");
 
     }
 
     private void initMainFragment() {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragmentContainer, new MainFragment(), "MainFragment")
+                .replace(R.id.fragmentContainer, new MainFragment(), "MainFragment")
                 .commit();
     }
 
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
                 .replace(R.id.fragmentContainer, new AmountFragment(), "AmoutFragmetn")
                 .addToBackStack(null)
                 .commit();
+
     }
 
     @Override
@@ -81,12 +85,37 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
                 .commit();
     }
 
+
+
     @Override
     public void OnListenerButtonAddIncome() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, new EnterDataIncome(), "EnterDataIncome")
+                .replace(R.id.fragmentContainer2, new EnterDataIncome(), "EnterDataIncome")
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void OnListenerButtonAddExpenses() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer2, new EnterDataExpenses(), "EnterDataExpenses")
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.addExpenses:
+                OnListenerButtonAddExpenses();
+                break;
+            case R.id.addIncome:
+                OnListenerButtonAddIncome();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -107,4 +136,5 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
         drawer_layout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
