@@ -20,17 +20,23 @@ import com.example.project.EnterDataExpenses.EnterDataExpenses;
 import com.example.project.EnterDataIncome.EnterDataIncome;
 import com.example.project.MainActivity;
 import com.example.project.R;
+import com.example.project.domain.Expenses;
+import com.example.project.domain.Income;
 import com.example.project.fragmentAmount.AmountFragment;
 import com.example.project.fragmentExpenses.ExpensesFragment;
 import com.example.project.fragmentIncome.IncomeFragment;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainFragment extends Fragment {
 
+    private MainFragmentViewModel mMainFragmentViewModel;
     private Activity mActivity;
     private ListenerButton listenerButton;
     private LinearLayout allIncome;
@@ -42,7 +48,6 @@ public class MainFragment extends Fragment {
     private TextView currMainEx;
     private TextView amountCurrMain;
     private TextView amountTextViewMain;
-    private SharedPreferences mSharedPreferences;
 
     @Nullable
     @Override
@@ -68,34 +73,51 @@ public class MainFragment extends Fragment {
             setHasOptionsMenu(true);
             OnListener();
             Toolbar toolbar1 = getActivity().findViewById(R.id.toolBar);
-            toolbar1.setTitle("Главная");
+            toolbar1.setTitle("Доходы и расходы");
+            initViewModel();
         }
     }
 
-    @Override
-    public void onStart() {
-        allSharedPreferences();
+    private void initViewModel() {
+        mMainFragmentViewModel = new ViewModelProvider(this , new MainFragmentViewModelFactory(getContext()))
+                .get(MainFragmentViewModel.class);
+        mMainFragmentViewModel.getIncomeListLiveData().observe(getViewLifecycleOwner() , this::initDBIncome);
+        mMainFragmentViewModel.getExpenseseListLiveData().observe(getViewLifecycleOwner(),this::initDBExpenses);
 
-        super.onStart();
     }
 
-
-    private void allSharedPreferences() {
-        mSharedPreferences = mActivity.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
-        String income = mSharedPreferences.getString(IncomeFragment.AMOIN_INCOME, "");
-        if (!income.equals("")) {
-            incomeTextViewMain.setText(income);
-            currMain.setVisibility(View.VISIBLE);
+    private void initDBExpenses(List<Expenses> expenses) {
+        int money = 0;
+        for (Expenses in : expenses) {
+            money += Integer.parseInt(in.getExpenses());
         }
-        String expenses = mSharedPreferences.getString(ExpensesFragment.AMOIN_EXPENSES, "");
-        if (!income.equals("")) {
-            expensesTextViewMain.setText(expenses);
+        if(String.valueOf(money).equals("0")){
+            expensesTextViewMain.setVisibility(View.INVISIBLE);
+            currMainEx.setVisibility(View.INVISIBLE);
+        }else {
+            expensesTextViewMain.setText("-" + money);
+            expensesTextViewMain.setVisibility(View.VISIBLE);
             currMainEx.setVisibility(View.VISIBLE);
         }
-        String amount = mSharedPreferences.getString(AmountFragment.AMOUN_All, "");
-        if (!amount.equals("")) {
-            amountTextViewMain.setText(amount);
+    }
+
+    private void initDBIncome(List<Income> incomes) {
+        int money = 0;
+        for (Income in : incomes) {
+            money += Integer.parseInt(in.getIncome());
+        }
+        if(String.valueOf(money).equals("0")) {
+            amountTextViewMain.setVisibility(View.INVISIBLE);
+            amountCurrMain.setVisibility(View.INVISIBLE);
+            incomeTextViewMain.setVisibility(View.INVISIBLE);
+            currMain.setVisibility(View.VISIBLE);
+        }else {
+            amountTextViewMain.setText(String.valueOf(money));
+            amountTextViewMain.setVisibility(View.VISIBLE);
             amountCurrMain.setVisibility(View.VISIBLE);
+            incomeTextViewMain.setText("+" + money);
+            incomeTextViewMain.setVisibility(View.VISIBLE);
+            currMain.setVisibility(View.VISIBLE);
         }
     }
 

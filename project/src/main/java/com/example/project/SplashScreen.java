@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static final int LEHGHT_DISPLAY_SPLASH = 1000;
+    private static final int LEHGHT_DISPLAY_SPLASH = 500;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

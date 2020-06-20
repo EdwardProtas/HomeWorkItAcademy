@@ -36,8 +36,8 @@ private AmountFragmentViewModel mAmountFragmentViewModel;
     private TextView kartaCurrenceAmoinAll;
     private TextView nal;
     private TextView kar;
-    private SharedPreferences sharedPreferences;
     private Activity mContext;
+    private FragmentActivity mFragmentActivity;
 
     @Nullable
     @Override
@@ -64,14 +64,6 @@ private AmountFragmentViewModel mAmountFragmentViewModel;
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        sharedPreferences = mContext.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AMOUN_All, amoinAll.getText().toString());
-        editor.apply();
-    }
 
     private void initViewModel() {
         mAmountFragmentViewModel = new ViewModelProvider(this , new AmountFragmentViewModelFactory(getContext()))
@@ -87,8 +79,13 @@ private AmountFragmentViewModel mAmountFragmentViewModel;
         for (Income in : incomes) {
             money += Integer.parseInt(in.getIncome());
         }
-        cashAll.setText(String.valueOf(money));
-        cashCurrenceAmoinAll.setVisibility(View.VISIBLE);
+        if (String.valueOf(money).equals("0")) {
+            cashAll.setVisibility(View.INVISIBLE);
+            cashCurrenceAmoinAll.setVisibility(View.INVISIBLE);
+        } else {
+            cashAll.setText(String.valueOf(money));
+            cashCurrenceAmoinAll.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addAmoutInTextKar(List<Income> incomes) {

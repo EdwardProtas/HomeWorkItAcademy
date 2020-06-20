@@ -31,4 +31,30 @@
     <string name="cafe">Кафе</string>
     <string name="other">Прочие</string>
 
+    <string-array name="categoryExpenses">
+    <item></item>
+    <item>Kоммунальные</item>
+    <item>Телефон</item>
+    <item>Интернет</item>
+    <item>Транспорт</item>
+    <item>Супермаркет</item>
+    <item>Медицина</item>
+    <item>Одежда</item>
+    <item>Кафе</item>
+    <item>Прочие</item>
+</string-array>
+
+
+    <string-array name="bill">
+        <item></item>
+        <item>Наличные</item>
+        <item>Карта</item>
+    </string-array>
+
+    <string-array name="categoryIncome">
+        <item></item>
+        <item>Работа</item>
+        <item>Подарки</item>
+    </string-array>
+
 </resources>

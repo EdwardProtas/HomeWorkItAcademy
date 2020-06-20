@@ -53,6 +53,7 @@ public class AllFragmentExpenses extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mContext = getActivity();
         if (mContext != null) {
             initRecyclerView(view);
@@ -274,4 +275,4 @@ public class AllFragmentExpenses extends Fragment {
                     .show();
         });
     }
-}
+    }

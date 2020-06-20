@@ -43,6 +43,7 @@
             android:layout_marginTop="@dimen/def_magrin_text"
             android:layout_marginRight="@dimen/magr10dp"
             android:gravity="right"
+            android:visibility="invisible"
             />
 
         <TextView
@@ -98,6 +99,7 @@
             android:layout_marginTop="@dimen/def_magrin_text"
             android:layout_marginRight="@dimen/magr10dp"
             android:gravity="right"
+            android:visibility="invisible"
             />
 
         <TextView
@@ -152,6 +154,7 @@
             android:layout_marginTop="@dimen/def_magrin_text"
             android:layout_marginRight="@dimen/magr10dp"
             android:gravity="right"
+            android:visibility="invisible"
             />
 
         <TextView

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.project.EnterDataExpenses.EnterDataExpenses;
 import com.example.project.EnterDataIncome.EnterDataIncome;
@@ -24,8 +25,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
 
     private DrawerLayout drawer_layout;
     public static final String MAIN_ACTINITY = "MAINACTINITY";
-//    public static  String MAIN_INCOME = "MAIN_INCOME";
     private  Toolbar toolbar;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +41,16 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer_layout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+        mFragmentManager = getSupportFragmentManager();
         if(savedInstanceState == null) {
             initMainFragment();
         }
-        toolbar.setTitle("Главная");
+
 
     }
 
     private void initMainFragment() {
-        getSupportFragmentManager().beginTransaction()
+        mFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, new MainFragment(), "MainFragment")
                 .commit();
     }
@@ -62,26 +64,26 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
 
     @Override
     public void OnAmountFragment() {
-        getSupportFragmentManager().beginTransaction()
+        mFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, new AmountFragment(), "AmoutFragmetn")
-                .addToBackStack(null)
+                .addToBackStack("AmoutFragmetn")
                 .commit();
 
     }
 
     @Override
     public void OnIncomeFragment() {
-        getSupportFragmentManager().beginTransaction()
+        mFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, new IncomeFragment(), "IncomeFragment")
-                .addToBackStack(null)
+                .addToBackStack("IncomeFragment")
                 .commit();
     }
 
     @Override
     public void OnExpensesFragment() {
-        getSupportFragmentManager().beginTransaction()
+        mFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, new ExpensesFragment(), "ExpensesFragment")
-                .addToBackStack(null)
+                .addToBackStack("ExpensesFragment")
                 .commit();
     }
 
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
     public void OnListenerButtonAddIncome() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer2, new EnterDataIncome(), "EnterDataIncome")
-                .addToBackStack(null)
+                .addToBackStack("EnterDataIncome")
                 .commit();
     }
 
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
     public void OnListenerButtonAddExpenses() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer2, new EnterDataExpenses(), "EnterDataExpenses")
-                .addToBackStack(null)
+                .addToBackStack("EnterDataExpenses")
                 .commit();
     }
 
@@ -136,5 +138,4 @@ public class MainActivity extends AppCompatActivity implements MainFragment.List
         drawer_layout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

@@ -43,20 +43,17 @@
             android:layout_marginTop="@dimen/def_magrin_main_fragment"
             android:layout_marginLeft="@dimen/def_magrin_main_fragment" />
 
-        <EditText
-            android:id="@+id/categoryCompleteTextView"
+        <Spinner
+            android:id="@+id/spinerCategoryCompleteTextView"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_marginTop="14dp"
             android:layout_marginLeft="@dimen/def_magrin_text"
             android:layout_marginRight="@dimen/def_magrin_text"
-            />
-
-        <View
-            android:id="@+id/categoryViewForOpenContextMenu"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+            >
+        </Spinner>
 
     </LinearLayout>
 
@@ -75,19 +72,16 @@
             android:layout_marginTop="@dimen/def_magrin_main_fragment"
             android:layout_marginLeft="@dimen/def_magrin_main_fragment" />
 
-        <EditText
+        <Spinner
             android:id="@+id/billCompleteTextView"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
+           android:layout_gravity="bottom"
             android:layout_marginLeft="@dimen/def_magrin_text"
             android:layout_marginRight="@dimen/def_magrin_text"/>
 
-        <View
-            android:id="@+id/viewForOpenContextMenu"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
 
     </LinearLayout>
 

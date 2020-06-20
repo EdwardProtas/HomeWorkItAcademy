@@ -22,6 +22,9 @@ import com.example.project.R;
 import com.example.project.domain.Expenses;
 import com.example.project.fragmentExpenses.TabLayoutFragmentsExpenses.PagerAdapterExpenses;
 
+import com.example.project.fragmentIncome.TabLayoutFragments.AllFragment;
+import com.example.project.fragmentIncome.TabLayoutFragments.CategoryFragment;
+import com.example.project.fragmentIncome.TabLayoutFragments.DaysFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -48,15 +51,10 @@ public class ExpensesFragment extends Fragment {
     private TextView currAmoinExpenses;
     private Activity mContext;
     private ListenerButtonAddExpenses listenerButtonAddExpenses;
-    private SharedPreferences sharedPreferences;
-    public static final String AMOIN_EXPENSES = "AMOIN_EXPENSES";
     private TabLayout tabLayoutExpenses;
-    private TabItem allTabItem;
-    private TabItem daysTabItem;
-    private TabItem categoryTabItem;
     private ViewPager viewPagerExpenses;
-    private FragmentActivity mFragmentActivity;
     private Calendar selectedDate;
+    private  PagerAdapterExpenses pagerAdapter;
 
     @Nullable
     @Override
@@ -73,25 +71,13 @@ public class ExpensesFragment extends Fragment {
             amoinIncome = view.findViewById(R.id.amoinIncome);
             currAmoinExpenses = view.findViewById(R.id.currAmoinExpenses);
             tabLayoutExpenses = view.findViewById(R.id.tabLayoutExpenses);
-            allTabItem = view.findViewById(R.id.allTabItem);
-            daysTabItem = view.findViewById(R.id.daysTabItem);
-            categoryTabItem = view.findViewById(R.id.categoryTabItem);
             viewPagerExpenses = view.findViewById(R.id.viewPagerExpenses);
-            PagerAdapterExpenses pagerAdapter = new PagerAdapterExpenses(getChildFragmentManager(), tabLayoutExpenses.getTabCount());
+            pagerAdapter = new PagerAdapterExpenses(getChildFragmentManager(), tabLayoutExpenses.getTabCount());
+            pagerAdapter.AddFragment(new AllFragment() , "Все");
+            pagerAdapter.AddFragment(new DaysFragment(), "Дни");
+            pagerAdapter.AddFragment(new CategoryFragment(), "Категории");
             viewPagerExpenses.setAdapter(pagerAdapter);
-            tabLayoutExpenses.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    viewPagerExpenses.setCurrentItem(tab.getPosition());
-                }
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-                }
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-                }
-            });
-            sharedPreferences = mContext.getSharedPreferences(MainActivity.MAIN_ACTINITY, Context.MODE_PRIVATE);
+            tabLayoutExpenses.setupWithViewPager(viewPagerExpenses);
             buttonAddIncome(view);
             initViewModel();
             setHasOptionsMenu(true);
@@ -112,13 +98,6 @@ public class ExpensesFragment extends Fragment {
         void OnListenerButtonAddExpenses();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AMOIN_EXPENSES, amoinIncome.getText().toString());
-        editor.apply();
-    }
 
     private void buttonAddIncome(View view) {
         buttonAddIncome = view.findViewById(R.id.buttonAddIncome);
@@ -141,8 +120,13 @@ public class ExpensesFragment extends Fragment {
             expensesFragmentViewModel.setExpensesCategoryLiveData(in.getCategory());
             expensesFragmentViewModel.setExpensesDateLiveData(in.getData().getTime());
         }
-        amoinIncome.setText("-" + money);
-        currAmoinExpenses.setVisibility(View.VISIBLE);
+        if(String.valueOf(money).equals("0")) {
+            amoinIncome.setVisibility(View.INVISIBLE);
+            currAmoinExpenses.setVisibility(View.INVISIBLE);
+        }else {
+            amoinIncome.setText("-" + money);
+            currAmoinExpenses.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -156,6 +140,4 @@ public class ExpensesFragment extends Fragment {
         inflater.inflate(R.menu.menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-
 }
