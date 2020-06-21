@@ -110,7 +110,7 @@ public class MainFragment extends Fragment {
             amountTextViewMain.setVisibility(View.INVISIBLE);
             amountCurrMain.setVisibility(View.INVISIBLE);
             incomeTextViewMain.setVisibility(View.INVISIBLE);
-            currMain.setVisibility(View.VISIBLE);
+            currMain.setVisibility(View.INVISIBLE);
         }else {
             amountTextViewMain.setText(String.valueOf(money));
             amountTextViewMain.setVisibility(View.VISIBLE);

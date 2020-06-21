@@ -30,6 +30,7 @@ public class MainFragmentViewModel extends ViewModel {
     LiveData<List<Expenses>> getExpenseseListLiveData() {
         return expensesListLiveData;
     }
+
     LiveData<List<Income>> getIncomeListLiveData() {
         return incomeListLiveData;
     }

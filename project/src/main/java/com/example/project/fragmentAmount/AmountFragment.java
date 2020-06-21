@@ -93,8 +93,12 @@ private AmountFragmentViewModel mAmountFragmentViewModel;
         for (Income in : incomes) {
             money += Integer.parseInt(in.getIncome());
         }
-        kartAll.setText(String.valueOf(money));
-        kartaCurrenceAmoinAll.setVisibility(View.VISIBLE);
+        if (String.valueOf(money).equals("0")) {
+            kartAll.setVisibility(View.INVISIBLE);
+            kartaCurrenceAmoinAll.setVisibility(View.INVISIBLE);
+        } else {
+            kartAll.setText(String.valueOf(money));
+        } kartaCurrenceAmoinAll.setVisibility(View.VISIBLE);
     }
 
     private void addAmoutInTextView(List<Income> incomes) {
@@ -102,8 +106,12 @@ private AmountFragmentViewModel mAmountFragmentViewModel;
         for (Income in : incomes) {
             money += Integer.parseInt(in.getIncome());
         }
-        amoinAll.setText(String.valueOf(money));
-        currenceAmoinAll.setVisibility(View.VISIBLE);
+        if (String.valueOf(money).equals("0")) {
+            amoinAll.setVisibility(View.INVISIBLE);
+            currenceAmoinAll.setVisibility(View.INVISIBLE);
+        } else {
+            amoinAll.setText(String.valueOf(money));
+        }   currenceAmoinAll.setVisibility(View.VISIBLE);
     }
 
 

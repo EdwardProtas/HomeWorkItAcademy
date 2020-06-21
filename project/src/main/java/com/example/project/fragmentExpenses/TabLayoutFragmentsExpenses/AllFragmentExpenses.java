@@ -43,7 +43,6 @@ public class AllFragmentExpenses extends Fragment {
     private Calendar selectedDate;
     private String importInRecycler;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,7 +52,6 @@ public class AllFragmentExpenses extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mContext = getActivity();
         if (mContext != null) {
             initRecyclerView(view);

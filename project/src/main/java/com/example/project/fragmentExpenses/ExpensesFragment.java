@@ -20,6 +20,9 @@ import android.widget.TextView;
 import com.example.project.MainActivity;
 import com.example.project.R;
 import com.example.project.domain.Expenses;
+import com.example.project.fragmentExpenses.TabLayoutFragmentsExpenses.AllFragmentExpenses;
+import com.example.project.fragmentExpenses.TabLayoutFragmentsExpenses.CategoryFragmentExpenses;
+import com.example.project.fragmentExpenses.TabLayoutFragmentsExpenses.DaysFragmentExpenses;
 import com.example.project.fragmentExpenses.TabLayoutFragmentsExpenses.PagerAdapterExpenses;
 
 import com.example.project.fragmentIncome.TabLayoutFragments.AllFragment;
@@ -73,9 +76,9 @@ public class ExpensesFragment extends Fragment {
             tabLayoutExpenses = view.findViewById(R.id.tabLayoutExpenses);
             viewPagerExpenses = view.findViewById(R.id.viewPagerExpenses);
             pagerAdapter = new PagerAdapterExpenses(getChildFragmentManager(), tabLayoutExpenses.getTabCount());
-            pagerAdapter.AddFragment(new AllFragment() , "Все");
-            pagerAdapter.AddFragment(new DaysFragment(), "Дни");
-            pagerAdapter.AddFragment(new CategoryFragment(), "Категории");
+            pagerAdapter.AddFragment(new AllFragmentExpenses(), "Все");
+            pagerAdapter.AddFragment(new DaysFragmentExpenses(), "Дни");
+            pagerAdapter.AddFragment(new CategoryFragmentExpenses(), "Категории");
             viewPagerExpenses.setAdapter(pagerAdapter);
             tabLayoutExpenses.setupWithViewPager(viewPagerExpenses);
             buttonAddIncome(view);
@@ -124,7 +127,9 @@ public class ExpensesFragment extends Fragment {
             amoinIncome.setVisibility(View.INVISIBLE);
             currAmoinExpenses.setVisibility(View.INVISIBLE);
         }else {
+
             amoinIncome.setText("-" + money);
+            amoinIncome.setVisibility(View.VISIBLE);
             currAmoinExpenses.setVisibility(View.VISIBLE);
         }
     }
