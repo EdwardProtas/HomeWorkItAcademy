@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="settings_toolBar">24sp</dimen>
+    <dimen name="margin_left">18dp</dimen>
+    <dimen name="margin_Top">12dp</dimen>
+    <dimen name="switch_celsius">28sp</dimen>
+    <dimen name="margint_top_fragment_main">52dp</dimen>
+    <dimen name="name_city_fragment_main">52sp</dimen>
+</resources>

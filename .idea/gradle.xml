@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/mp3player" />
             <option value="$PROJECT_DIR$/project" />
             <option value="$PROJECT_DIR$/weather" />
+            <option value="$PROJECT_DIR$/widget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
