@@ -1,12 +1,17 @@
 package com.example.databasemultithreading;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.databasemultithreading.dataBase.ContactDBHelper;
 import com.example.databasemultithreading.dataBase.ContactEntity;
 import com.example.databasemultithreading.dataBase.DataBase;
 import com.facebook.stetho.Stetho;
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
     private Boolean ff;
     private List<NewAdapter.Contact> newContactList = new ArrayList<>();
     private DataBase mDataBase;
+    private ContactDBHelper contactDBHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +67,19 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
         }
         recyclerview.setLayoutManager(new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
         adapter = (NewAdapter) recyclerview.getAdapter();
+        contactDBHelper = new ContactDBHelper(getApplicationContext());
     }
 
+
+//    public void insert(NewAdapter.Contact contact){
+//        SQLiteDatabase db = contactDBHelper.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(ContactDBHelper.ContactEntry.COLUMN_NAME_CONTACT , contact.getNameText() );
+//        contentValues.put(ContactDBHelper.ContactEntry.COLUMN_ID , contact.getId() );
+//        contentValues.put(ContactDBHelper.ContactEntry.COLUMN_NAME_PHONE , contact.getNumberText() );
+//        contentValues.put(ContactDBHelper.ContactEntry.COLUMN_NAME_TYPE , contact.getType() );
+//        long newRowId = db.insert(ContactDBHelper.ContactEntry.TABLE_NAME , null , contentValues);
+//    }
 
 
     @Override
@@ -85,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.Select
                         if (!newName.trim().isEmpty() && !newNumberAndEmail.trim().isEmpty() && recyclerview.getAdapter() != null) {
                             NewAdapter.Contact contact = new NewAdapter.Contact(newName, newNumberAndEmail, ff);
                             adapter.addItems(contact);
+
                             addContact(contact);
                         }
                     }

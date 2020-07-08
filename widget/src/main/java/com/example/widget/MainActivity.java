@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements FragmentMain.List
 
     }
 
+    
     @Override
     public void OnSettingButton() {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingFragment(), "SettingFragment")

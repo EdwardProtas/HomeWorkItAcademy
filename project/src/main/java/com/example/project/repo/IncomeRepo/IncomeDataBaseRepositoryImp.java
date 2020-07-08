@@ -37,10 +37,12 @@ public class IncomeDataBaseRepositoryImp implements IncomeDataBaseRepository {
 
     @Override
     public LiveData<List<Income>> getIncomeLiveData() {
-        return Transformations.map(incomeDao.getAllLivaDataIncome(), input -> input
-                .stream()
-                .map(mapper)
-                .collect(Collectors.toList()));
+        return Transformations.map(incomeDao.getAllLivaDataIncome(), new androidx.arch.core.util.Function<List<IncomeEntity>, List<Income>>() {
+            @Override
+            public List<Income> apply(List<IncomeEntity> input) {
+                return input.stream().map(mapper).collect(Collectors.toList());
+            }
+        });
     }
 
     @Override
